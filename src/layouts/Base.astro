@@ -1,0 +1,108 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+import Cursor from '../components/Cursor.astro';
+import Preloader from '../components/Preloader.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Tampilkan preloader (hanya di halaman utama) */
+  preloader?: boolean;
+}
+
+const {
+  title = `${site.name} — ${site.tagline}`,
+  description = site.description,
+  preloader = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.png', Astro.site);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${site.url}/#org`,
+      name: site.name,
+      legalName: site.legalName,
+      url: site.url,
+      email: site.email,
+      logo: new URL('/favicon.svg', Astro.site).toString(),
+      sameAs: Object.values(site.social),
+      address: { '@type': 'PostalAddress', addressLocality: site.address, addressCountry: 'ID' },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      inLanguage: 'id-ID',
+      publisher: { '@id': `${site.url}/#org` },
+    },
+    ...[
+      'Pengembangan Website',
+      'Pengembangan Aplikasi Mobile',
+      'Sistem Bisnis Terintegrasi',
+      'Konsultasi Teknologi & AI',
+      'Perawatan & Dukungan Sistem',
+    ].map((name) => ({
+      '@type': 'Service',
+      name,
+      provider: { '@id': `${site.url}/#org` },
+      areaServed: 'ID',
+    })),
+  ],
+};
+---
+
+<!doctype html>
+<html lang="id" class="noise">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#0b0b0f" />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={site.locale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+
+    <script is:inline>
+      // Tandai JS aktif sedini mungkin supaya elemen yang dianimasikan
+      // tidak berkedip sebelum skrip utama jalan.
+      document.documentElement.classList.add('js');
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="font-sans">
+    {preloader && <Preloader />}
+    <Cursor />
+    <slot />
+    <script>
+      import '../scripts/app';
+    </script>
+  </body>
+</html>

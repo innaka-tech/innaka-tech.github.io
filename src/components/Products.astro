@@ -1,0 +1,68 @@
+---
+import { products } from '../data/services';
+import { site } from '../data/site';
+import SectionHead from './SectionHead.astro';
+import Icons from './Icons.astro';
+
+const demoUrl = (name: string) =>
+  `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Halo Innaka, saya ingin minta demo ${name}.`)}`;
+---
+
+<section id="produk" class="scroll-mt-[var(--nav-h)] bg-paper py-24 text-ink sm:py-32 lg:py-40" data-theme-light>
+  <div class="container-x">
+    <div class="grid gap-6 lg:grid-cols-12">
+      <div class="flex items-center gap-4 lg:col-span-3" data-reveal>
+        <span class="font-mono text-[11px] text-ink/60">(02)</span>
+        <span class="eyebrow !text-ink/60">Software siap pakai</span>
+      </div>
+      <h2 class="display text-[11vw] sm:text-[8vw] lg:col-span-9 lg:text-[4.8vw]" data-split>
+        Pasang hari ini, <span class="serif-italic text-ink/70">jalan hari ini.</span>
+      </h2>
+    </div>
+
+    <div class="mt-16 grid gap-6 lg:mt-24 lg:grid-cols-2" data-reveal-stagger>
+      {
+        products.map((p, i) => (
+          <article
+            class="product-card group relative flex min-h-[520px] flex-col justify-between overflow-hidden rounded-3xl bg-ink p-7 text-paper sm:p-10 lg:min-h-[640px]"
+            id={p.id}
+          >
+            <div
+              class="pointer-events-none absolute -right-1/4 -top-1/4 h-[80%] w-[80%] rounded-full opacity-40 blur-3xl transition-transform duration-[1200ms] ease-[var(--ease-out-expo)] group-hover:scale-125"
+              style={`background: radial-gradient(closest-side, ${p.accent}, transparent 70%)`}
+              aria-hidden="true"
+            />
+            <div class="relative">
+              <div class="flex items-center justify-between">
+                <span class="eyebrow">{p.tag}</span>
+                <span class="font-mono text-[11px] text-paper/40">0{i + 1}</span>
+              </div>
+              <h3 class="display mt-10 text-[12vw] sm:text-[7vw] lg:text-[3.6vw]">{p.name}</h3>
+              <p class="serif-italic mt-3 text-[24px] leading-tight text-paper/80 sm:text-[28px]">{p.headline}</p>
+              <p class="mt-6 max-w-[44ch] text-[16px] leading-relaxed text-muted">{p.desc}</p>
+            </div>
+
+            <div class="relative mt-10">
+              <ul class="grid grid-cols-1 gap-y-3 border-t border-line pt-6 sm:grid-cols-2 sm:gap-x-6">
+                {p.features.map((f) => (
+                  <li class="flex items-center gap-3 text-[15px]">
+                    <span class="h-1.5 w-1.5 shrink-0 rounded-full" style={`background:${p.accent}`} />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-8 flex flex-wrap gap-3">
+                <a href={demoUrl(p.name)} target="_blank" rel="noopener" class="btn btn-primary" data-magnetic data-cursor="hide">
+                  Minta Demo
+                  <span class="btn-arrow">
+                    <Icons name="arrow" class="h-3.5 w-3.5" />
+                  </span>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

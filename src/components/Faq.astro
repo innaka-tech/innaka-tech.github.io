@@ -1,0 +1,43 @@
+---
+import { faqs } from '../data/services';
+import Icons from './Icons.astro';
+---
+
+<section id="faq" class="container-x scroll-mt-[var(--nav-h)] py-24 sm:py-32 lg:py-40">
+  <div class="grid gap-12 lg:grid-cols-12">
+    <div class="lg:col-span-4">
+      <div class="sticky top-[calc(var(--nav-h)+32px)]">
+        <div class="mb-6 flex items-center gap-4" data-reveal>
+          <span class="font-mono text-[11px] text-accent">(05)</span>
+          <span class="eyebrow">FAQ</span>
+        </div>
+        <h2 class="display text-[11vw] sm:text-[8vw] lg:text-[3.6vw]" data-split>
+          Yang sering <span class="serif-italic text-paper-2">ditanyakan.</span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="divide-y divide-line border-y border-line lg:col-span-8" data-reveal-stagger>
+      {
+        faqs.map((f, i) => (
+          <details class="faq-item group" name="faq">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-6 py-6 sm:py-7" data-cursor="small">
+              <span class="flex gap-5">
+                <span class="mt-1.5 font-mono text-[11px] text-muted">0{i + 1}</span>
+                <span class="text-[18px] font-medium tracking-tight transition-colors group-hover:text-accent sm:text-[21px]">{f.q}</span>
+              </span>
+              <span class="faq-icon mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-paper/70">
+                <Icons name="plus" class="h-3.5 w-3.5" />
+              </span>
+            </summary>
+            <div class="faq-panel">
+              <div>
+                <p class="max-w-[60ch] pb-7 pl-[calc(11px+1.25rem)] text-[16px] leading-relaxed text-muted sm:pl-[calc(22px+1.25rem)]">{f.a}</p>
+              </div>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+---
+const items = [
+  'Website',
+  'Aplikasi Mobile',
+  'Sistem Terintegrasi',
+  'Otomasi',
+  'AI Chatbot',
+  'POS',
+  'WMS',
+  'Dashboard',
+  'Payment Gateway',
+  'WhatsApp API',
+  'Infrastruktur',
+  'Perawatan',
+];
+---
+
+<div class="marquee border-y border-line py-5" style="--marquee-duration: 45s" aria-hidden="true">
+  {
+    [0, 1].map(() => (
+      <div class="marquee-track pr-10">
+        {items.map((t) => (
+          <span class="flex items-center gap-10 text-[15px] font-medium uppercase tracking-[0.12em] text-paper/70">
+            {t}
+            <span class="h-1.5 w-1.5 rounded-full bg-accent" />
+          </span>
+        ))}
+      </div>
+    ))
+  }
+</div>

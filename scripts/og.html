@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap"
+    />
+    <style>
+      * { margin: 0; box-sizing: border-box; }
+      body {
+        width: 1200px; height: 630px; overflow: hidden;
+        background: #0b0b0f; color: #f3f0e8;
+        font-family: 'Inter Tight', sans-serif;
+        position: relative; padding: 64px;
+        display: flex; flex-direction: column; justify-content: space-between;
+      }
+      .grid {
+        position: absolute; inset: 0;
+        background-image: linear-gradient(to right, rgba(243,240,232,.08) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(243,240,232,.08) 1px, transparent 1px);
+        background-size: 96px 96px;
+        mask-image: radial-gradient(ellipse at 50% 0%, #000 20%, transparent 70%);
+      }
+      .orb {
+        position: absolute; left: 50%; top: -40%; width: 900px; height: 900px; transform: translateX(-50%);
+        border-radius: 999px; filter: blur(80px);
+        background: radial-gradient(closest-side, rgba(201,242,76,.22), transparent 70%);
+      }
+      .top { display: flex; align-items: center; gap: 16px; position: relative; }
+      .mono { font-family: 'JetBrains Mono', monospace; font-size: 15px; letter-spacing: .18em; text-transform: uppercase; color: rgba(243,240,232,.56); }
+      h1 { position: relative; font-weight: 500; font-size: 92px; line-height: .95; letter-spacing: -.035em; max-width: 1000px; }
+      h1 i { font-family: 'Instrument Serif', serif; font-weight: 400; color: #c9f24c; }
+      .bottom { display: flex; justify-content: space-between; align-items: flex-end; position: relative; }
+      .url { font-size: 22px; font-weight: 500; }
+    </style>
+  </head>
+  <body>
+    <div class="grid"></div>
+    <div class="orb"></div>
+    <div class="top">
+      <svg width="44" height="44" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#f3f0e8"/><path d="M18 46V18h7v28h-7Zm13 0V18l15 17.4V18h7v28L39 28.6V46h-8Z" fill="#0b0b0f"/></svg>
+      <span style="font-size:24px;font-weight:500;letter-spacing:-.02em">Innaka</span>
+    </div>
+    <h1>Solusi digital <i>&amp; AI</i> untuk bisnis yang siap tumbuh.</h1>
+    <div class="bottom">
+      <span class="mono">Website · Aplikasi · Sistem Terintegrasi · Konsultasi AI</span>
+      <span class="url">innaka.dev</span>
+    </div>
+  </body>
+</html>

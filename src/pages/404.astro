@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Icons from '../components/Icons.astro';
+---
+
+<Base title="Halaman tidak ditemukan — Innaka">
+  <Nav />
+  <main class="container-x flex min-h-[100svh] flex-col justify-center pt-[var(--nav-h)]">
+    <p class="eyebrow mb-6" data-reveal>Error 404</p>
+    <h1 class="display text-[14vw] sm:text-[10vw] lg:text-[7vw]" data-split>
+      Halaman ini <span class="serif-italic text-accent">tidak ada.</span>
+    </h1>
+    <div class="mt-10" data-reveal data-reveal-delay="0.3">
+      <a href="/" class="btn btn-primary" data-magnetic data-cursor="hide">
+        Kembali ke beranda
+        <span class="btn-arrow"><Icons name="arrow" class="h-3.5 w-3.5" /></span>
+      </a>
+    </div>
+  </main>
+  <Footer />
+</Base>

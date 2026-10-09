@@ -1,0 +1,69 @@
+---
+import { site, whatsappUrl } from '../data/site';
+import Icons from './Icons.astro';
+---
+
+<section id="kontak" class="relative scroll-mt-[var(--nav-h)] overflow-hidden border-t border-line py-28 sm:py-36 lg:py-48">
+  <div
+    class="cta-orb pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[90vmax] w-[90vmax] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50 blur-3xl"
+    style="background: radial-gradient(closest-side, rgba(201,242,76,0.16), transparent 70%)"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-x">
+    <p class="eyebrow mb-8" data-reveal>Mulai dari percakapan</p>
+    <h2 class="display text-[15vw] leading-[0.9] sm:text-[11vw] lg:text-[8.5vw]" data-split>
+      Ceritakan <span class="serif-italic text-accent">masalahnya,</span><br />
+      kami yang pikirkan solusinya.
+    </h2>
+
+    <div class="mt-12 grid gap-10 border-t border-line pt-10 lg:grid-cols-12 lg:gap-12">
+      <div class="flex flex-wrap items-center gap-3 lg:col-span-7" data-reveal>
+        <a href={whatsappUrl} target="_blank" rel="noopener" class="btn btn-primary !px-7 !py-4 !text-[16px]" data-magnetic data-cursor="hide">
+          <Icons name="whatsapp" class="h-5 w-5" />
+          Chat via WhatsApp
+          <span class="btn-arrow"><Icons name="arrow" class="h-3.5 w-3.5" /></span>
+        </a>
+        <a href={`mailto:${site.email}`} class="btn btn-ghost !px-7 !py-4 !text-[16px]" data-magnetic data-cursor="hide">
+          <Icons name="mail" class="h-5 w-5" />
+          {site.email}
+        </a>
+      </div>
+
+      <form
+        class="grid gap-4 lg:col-span-5"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        data-reveal
+        data-reveal-delay="0.15"
+        id="contact-form"
+      >
+        <input type="hidden" name="access_key" value={site.web3formsKey} />
+        <input type="hidden" name="subject" value={`Pesan baru dari ${site.name} website`} />
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="group flex flex-col gap-2">
+            <span class="eyebrow">Nama</span>
+            <input required name="name" type="text" autocomplete="name" class="border-b border-line bg-transparent py-3 text-[16px] outline-none transition-colors focus:border-accent" placeholder="Nama Anda" />
+          </label>
+          <label class="group flex flex-col gap-2">
+            <span class="eyebrow">Email / WhatsApp</span>
+            <input required name="contact" type="text" autocomplete="email" class="border-b border-line bg-transparent py-3 text-[16px] outline-none transition-colors focus:border-accent" placeholder="email@bisnis.com" />
+          </label>
+        </div>
+        <label class="flex flex-col gap-2">
+          <span class="eyebrow">Ceritakan kebutuhan Anda</span>
+          <textarea required name="message" rows="3" class="resize-none border-b border-line bg-transparent py-3 text-[16px] outline-none transition-colors focus:border-accent" placeholder="Contoh: saya punya 3 toko dan ingin stoknya terhubung…"></textarea>
+        </label>
+        <div class="flex items-center justify-between gap-4 pt-2">
+          <p class="text-[13px] text-muted" id="form-status">Kami balas dalam 1 hari kerja.</p>
+          <button type="submit" class="btn btn-ghost" data-magnetic data-cursor="hide">
+            Kirim
+            <span class="btn-arrow"><Icons name="arrow" class="h-3.5 w-3.5" /></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

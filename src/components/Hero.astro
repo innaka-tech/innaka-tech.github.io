@@ -1,0 +1,66 @@
+---
+import { whatsappUrl } from '../data/site';
+import Icons from './Icons.astro';
+---
+
+<section id="top" class="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden pt-[var(--nav-h)]">
+  <!-- Background -->
+  <div class="grid-bg absolute inset-0 -z-10" aria-hidden="true"></div>
+  <div
+    class="hero-orb absolute -top-[20%] left-1/2 -z-10 h-[70vmax] w-[70vmax] -translate-x-1/2 rounded-full opacity-60 blur-3xl"
+    style="background: radial-gradient(closest-side, rgba(201,242,76,0.18), rgba(201,242,76,0.04) 60%, transparent 75%)"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-x relative pb-10 sm:pb-14 lg:pb-16">
+    <div class="mb-10 flex items-center gap-4 sm:mb-14" data-reveal>
+      <span class="h-2 w-2 rounded-full bg-accent"></span>
+      <p class="eyebrow">Jakarta, Indonesia — Studio teknologi & AI</p>
+    </div>
+
+    <h1 class="display max-w-[14ch] text-[13.5vw] sm:text-[10.5vw] lg:text-[7.4vw]" data-split data-split-delay="0.15">
+      Solusi digital
+      <span class="serif-italic text-accent">&amp; AI</span>
+      untuk bisnis yang siap tumbuh.
+    </h1>
+
+    <div class="mt-10 grid gap-8 border-t border-line pt-8 sm:mt-14 lg:grid-cols-12 lg:gap-12">
+      <p class="text-balance text-[17px] leading-relaxed text-muted lg:col-span-5 lg:col-start-1 lg:text-[19px]" data-reveal data-reveal-delay="0.5">
+        Website, aplikasi mobile, sistem bisnis terintegrasi, dan konsultasi AI — dibangun oleh satu tim yang paham bisnis Indonesia.
+      </p>
+      <div class="flex flex-wrap items-center gap-3 lg:col-span-6 lg:col-start-7 lg:justify-end" data-reveal data-reveal-delay="0.6">
+        <a href={whatsappUrl} target="_blank" rel="noopener" class="btn btn-primary" data-magnetic data-cursor="hide">
+          Konsultasi Gratis
+          <span class="btn-arrow"><Icons name="arrow" class="h-3.5 w-3.5" /></span>
+        </a>
+        <a href="#layanan" class="btn btn-ghost" data-magnetic data-cursor="hide">
+          Lihat Layanan
+          <span class="btn-arrow"><Icons name="arrow-right" class="h-3.5 w-3.5 rotate-90" /></span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="pointer-events-none absolute bottom-6 right-5 hidden items-center gap-3 sm:right-8 lg:right-12 lg:flex" data-reveal data-reveal-delay="1">
+    <span class="eyebrow">Scroll</span>
+    <span class="relative block h-10 w-px overflow-hidden bg-line">
+      <span class="scroll-hint absolute inset-x-0 top-0 h-1/2 bg-paper"></span>
+    </span>
+  </div>
+</section>
+
+<style>
+  .scroll-hint {
+    animation: hint 1.8s var(--ease-in-out-quart) infinite;
+  }
+  @keyframes hint {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(200%);
+    }
+  }
+</style>

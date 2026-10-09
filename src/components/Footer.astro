@@ -1,0 +1,65 @@
+---
+import { site } from '../data/site';
+
+const year = new Date().getFullYear();
+const links = [
+  { href: '#layanan', label: 'Layanan' },
+  { href: '#produk', label: 'Produk' },
+  { href: '#kenapa', label: 'Kenapa Innaka' },
+  { href: '#proses', label: 'Cara Kerja' },
+  { href: '#faq', label: 'FAQ' },
+  { href: '#kontak', label: 'Kontak' },
+];
+const socials = [
+  { href: site.social.instagram, label: 'Instagram' },
+  { href: site.social.linkedin, label: 'LinkedIn' },
+  { href: site.social.github, label: 'GitHub' },
+];
+---
+
+<footer class="border-t border-line">
+  <div class="container-x grid gap-12 py-14 lg:grid-cols-12 lg:py-20">
+    <div class="lg:col-span-5">
+      <a href="#top" class="flex items-center gap-3" data-cursor="small">
+        <svg class="h-8 w-8" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="14" class="fill-paper"></rect>
+          <path d="M18 46V18h7v28h-7Zm13 0V18l15 17.4V18h7v28L39 28.6V46h-8Z" class="fill-ink"></path>
+        </svg>
+        <span class="text-[17px] font-medium tracking-tight">{site.name}</span>
+      </a>
+      <p class="mt-6 max-w-[38ch] text-[15px] leading-relaxed text-muted">{site.tagline} Studio teknologi untuk bisnis Indonesia.</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-8 lg:col-span-7 lg:grid-cols-3">
+      <div>
+        <p class="eyebrow mb-5">Navigasi</p>
+        <ul class="flex flex-col gap-3">
+          {links.map((l) => <li><a href={l.href} class="link-ul text-[15px] text-paper/80 hover:text-paper" data-cursor="small">{l.label}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Sosial</p>
+        <ul class="flex flex-col gap-3">
+          {socials.map((l) => <li><a href={l.href} target="_blank" rel="noopener" class="link-ul text-[15px] text-paper/80 hover:text-paper" data-cursor="small">{l.label}</a></li>)}
+        </ul>
+      </div>
+      <div class="col-span-2 lg:col-span-1">
+        <p class="eyebrow mb-5">Kontak</p>
+        <ul class="flex flex-col gap-3 text-[15px] text-paper/80">
+          <li><a href={`mailto:${site.email}`} class="link-ul" data-cursor="small">{site.email}</a></li>
+          <li class="text-muted">{site.address}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-x flex flex-col gap-3 border-t border-line py-6 text-[12px] text-muted sm:flex-row sm:items-center sm:justify-between">
+    <p>© {year} {site.legalName}. {site.nib && `NIB ${site.nib}.`} Hak cipta dilindungi.</p>
+    <p class="font-mono text-[11px] uppercase tracking-[0.14em]">Dibuat di Indonesia</p>
+  </div>
+
+  <!-- Big wordmark -->
+  <div class="container-x overflow-hidden pb-2" aria-hidden="true">
+    <div class="display select-none text-[28vw] leading-[0.8] text-paper/[0.04]" data-footer-word>INNAKA</div>
+  </div>
+</footer>

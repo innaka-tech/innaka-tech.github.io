@@ -1,0 +1,30 @@
+---
+import { process } from '../data/services';
+import SectionHead from './SectionHead.astro';
+---
+
+<section id="proses" class="container-x scroll-mt-[var(--nav-h)] py-24 sm:py-32 lg:py-40">
+  <SectionHead index="04" eyebrow="Cara kerja" title="Lima langkah," italic="tanpa drama." class="mb-16 lg:mb-24" />
+
+  <div class="relative grid gap-12 lg:grid-cols-12">
+    <div class="lg:col-span-4">
+      <p class="sticky top-[calc(var(--nav-h)+32px)] max-w-[36ch] text-[17px] leading-relaxed text-muted" data-reveal>
+        Prosesnya transparan dari awal. Anda selalu tahu apa yang sedang dikerjakan, kapan selesainya, dan berapa biayanya.
+      </p>
+    </div>
+
+    <ol class="relative lg:col-span-8" id="process-list">
+      <span class="absolute left-0 top-0 h-full w-px bg-line" aria-hidden="true"></span>
+      <span class="process-line absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-accent" aria-hidden="true"></span>
+      {
+        process.map((p) => (
+          <li class="process-item grid gap-4 border-b border-line py-8 pl-8 sm:grid-cols-12 sm:gap-8 sm:py-10 sm:pl-10 lg:py-12">
+            <span class="font-mono text-[12px] text-accent sm:col-span-2">{p.step}</span>
+            <h3 class="display text-[8vw] sm:col-span-4 sm:text-[3.2vw] lg:text-[2.2vw]">{p.title}</h3>
+            <p class="text-[16px] leading-relaxed text-muted sm:col-span-6">{p.desc}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

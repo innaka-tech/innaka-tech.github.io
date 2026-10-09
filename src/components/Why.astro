@@ -1,0 +1,25 @@
+---
+import { reasons } from '../data/services';
+import SectionHead from './SectionHead.astro';
+---
+
+<section id="kenapa" class="container-x scroll-mt-[var(--nav-h)] py-24 sm:py-32 lg:py-40">
+  <SectionHead index="03" eyebrow="Kenapa Innaka" title="Dibangun untuk" italic="bisnis yang serius tumbuh." class="mb-16 lg:mb-24" />
+
+  <div class="grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4" data-reveal-stagger>
+    {
+      reasons.map((r) => (
+        <div class="group flex min-h-[300px] flex-col justify-between bg-ink p-7 transition-colors duration-500 hover:bg-ink-2 sm:p-8">
+          <div class="display text-[16vw] text-paper sm:text-[8vw] lg:text-[4.6vw]">
+            <span data-count={r.stat}>{r.stat}</span>
+            <span class="serif-italic text-accent">{r.suffix}</span>
+          </div>
+          <div>
+            <h3 class="text-[19px] font-medium tracking-tight">{r.title}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">{r.desc}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,78 @@
+---
+import { site, whatsappUrl } from '../data/site';
+import Icons from './Icons.astro';
+
+const links = [
+  { href: '#layanan', label: 'Layanan' },
+  { href: '#produk', label: 'Produk' },
+  { href: '#proses', label: 'Cara Kerja' },
+  { href: '#faq', label: 'FAQ' },
+];
+---
+
+<header id="nav" class="fixed inset-x-0 top-0 z-50 transition-transform duration-500 ease-[var(--ease-out-expo)]">
+  <div class="nav-bg absolute inset-0 -z-10 border-b border-transparent bg-ink/0 backdrop-blur-0 transition-all duration-500"></div>
+  <nav class="container-x flex h-[var(--nav-h)] items-center justify-between" aria-label="Utama">
+    <a href="#top" class="group flex items-center gap-3" data-cursor="small" aria-label={`${site.name} — beranda`}>
+      <svg class="h-7 w-7" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" class="fill-paper transition-colors duration-500 group-hover:fill-accent"></rect>
+        <path d="M18 46V18h7v28h-7Zm13 0V18l15 17.4V18h7v28L39 28.6V46h-8Z" class="fill-ink"></path>
+      </svg>
+      <span class="text-[15px] font-medium tracking-tight">{site.name}</span>
+    </a>
+
+    <ul class="hidden items-center gap-8 md:flex">
+      {
+        links.map((l) => (
+          <li>
+            <a href={l.href} class="link-ul text-[14px] text-paper/80 transition-colors hover:text-paper" data-cursor="small">
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <a href={whatsappUrl} target="_blank" rel="noopener" class="btn btn-ghost hidden !py-2.5 text-[14px] md:inline-flex" data-magnetic>
+        Konsultasi Gratis
+        <span class="btn-arrow"><Icons name="arrow" class="h-3.5 w-3.5" /></span>
+      </a>
+      <button
+        id="menu-btn"
+        class="relative grid h-11 w-11 place-items-center rounded-full border border-line md:hidden"
+        aria-label="Buka menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="menu-line absolute h-px w-5 bg-paper transition-transform duration-500 ease-[var(--ease-out-expo)] -translate-y-[3px]"></span>
+        <span class="menu-line absolute h-px w-5 bg-paper transition-transform duration-500 ease-[var(--ease-out-expo)] translate-y-[3px]"></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile menu -->
+<div
+  id="mobile-menu"
+  class="pointer-events-none fixed inset-0 z-40 flex flex-col justify-end bg-ink px-5 pb-10 pt-[var(--nav-h)] opacity-0 transition-opacity duration-500 md:hidden"
+  aria-hidden="true"
+>
+  <ul class="flex flex-col gap-2">
+    {
+      links.map((l, i) => (
+        <li class="menu-item overflow-hidden">
+          <a href={l.href} class="display block translate-y-full py-1 text-[13vw] transition-transform duration-700 ease-[var(--ease-out-expo)]" style={`transition-delay:${80 + i * 60}ms`}>
+            {l.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="mt-10 flex flex-col gap-4 border-t border-line pt-8">
+    <a href={whatsappUrl} target="_blank" rel="noopener" class="btn btn-primary w-full">
+      Konsultasi Gratis via WhatsApp
+    </a>
+    <a href={`mailto:${site.email}`} class="eyebrow text-center">{site.email}</a>
+  </div>
+</div>

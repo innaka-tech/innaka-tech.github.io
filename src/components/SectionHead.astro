@@ -1,0 +1,22 @@
+---
+interface Props {
+  index: string;
+  eyebrow: string;
+  title: string;
+  /** Bagian judul yang ditampilkan italic serif */
+  italic?: string;
+  class?: string;
+}
+const { index, eyebrow, title, italic, class: cls = '' } = Astro.props;
+---
+
+<div class={`grid gap-6 lg:grid-cols-12 ${cls}`}>
+  <div class="flex items-center gap-4 lg:col-span-3" data-reveal>
+    <span class="font-mono text-[11px] text-accent">({index})</span>
+    <span class="eyebrow">{eyebrow}</span>
+  </div>
+  <h2 class="display text-[11vw] sm:text-[8vw] lg:col-span-9 lg:text-[4.8vw]" data-split>
+    {title}
+    {italic && <span class="serif-italic text-paper-2">{italic}</span>}
+  </h2>
+</div>

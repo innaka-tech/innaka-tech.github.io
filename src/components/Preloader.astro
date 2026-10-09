@@ -1,0 +1,13 @@
+---
+import { site } from '../data/site';
+---
+
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="flex items-end gap-4">
+    <span class="eyebrow">{site.name}</span>
+    <span class="eyebrow opacity-50">Loading</span>
+  </div>
+  <div class="display text-[22vw] leading-none text-paper sm:text-[16vw] lg:text-[12vw]" id="preloader-count">
+    0
+  </div>
+</div>
