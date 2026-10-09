@@ -7,7 +7,7 @@ export const site = {
   tagline: 'Solusi digital & AI untuk bisnis yang siap tumbuh.',
   description:
     'Innaka membangun website, aplikasi mobile, sistem bisnis terintegrasi, dan solusi AI untuk bisnis Indonesia. Konsultasi teknologi, software siap pakai (Tokopilot POS, WMS-Simple), hingga perawatan sistem.',
-  url: 'https://innaka-tech.github.io', // ganti ke https://innaka.dev saat DNS aktif
+  url: 'https://innaka.dev',
   locale: 'id_ID',
   email: 'halo@innaka.dev',
   whatsapp: '6281234567890', // TODO: nomor WA bisnis (format internasional tanpa +)

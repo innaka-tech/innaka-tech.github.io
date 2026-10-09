@@ -3,10 +3,9 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// Sementara tayang di GitHub Pages default. Saat domain innaka.dev
-// sudah mengarah ke Pages, ganti `site` menjadi 'https://innaka.dev'.
+// Domain utama. innaka-tech.github.io otomatis redirect ke sini oleh GitHub Pages.
 export default defineConfig({
-  site: 'https://innaka-tech.github.io',
+  site: 'https://innaka.dev',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
