@@ -1,5 +1,6 @@
 ---
-import { site } from '../data/site';
+import { site, companyName } from '../data/site';
+import Icons from './Icons.astro';
 
 const year = new Date().getFullYear();
 const links = [
@@ -54,12 +55,29 @@ const socials = [
   </div>
 
   <div class="container-x flex flex-col gap-3 border-t border-line py-6 text-[12px] text-muted sm:flex-row sm:items-center sm:justify-between">
-    <p>© {year} {site.legalName}. {site.nib && `NIB ${site.nib}.`} Hak cipta dilindungi.</p>
-    <p class="font-mono text-[11px] uppercase tracking-[0.14em]">Dibuat di Indonesia</p>
+    <p>© {year} {companyName}.{site.nib && ` NIB ${site.nib}.`} Hak cipta dilindungi.</p>
+    <a href="#top" class="group inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.14em] text-paper/70 hover:text-paper" data-cursor="small">
+      Kembali ke atas
+      <span class="grid h-8 w-8 place-items-center rounded-full border border-line transition-colors duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-ink">
+        <Icons name="arrow-right" class="h-3.5 w-3.5 -rotate-90" />
+      </span>
+    </a>
   </div>
 
   <!-- Big wordmark -->
-  <div class="container-x overflow-hidden pb-2" aria-hidden="true">
-    <div class="display select-none text-[28vw] leading-[0.8] text-paper/[0.04]" data-footer-word>INNAKA</div>
+  <div class="container-x overflow-hidden" aria-hidden="true">
+    <div class="footer-word display select-none whitespace-nowrap pt-4 text-center leading-[0.8]" data-footer-word>INNAKA</div>
   </div>
 </footer>
+
+<style>
+  .footer-word {
+    /* Lebar wordmark ≈ 3.35em → isi penuh lebar container tanpa terpotong */
+    font-size: min(calc((100vw - 40px) / 3.4), 25rem);
+    letter-spacing: -0.045em;
+    background: linear-gradient(to bottom, rgba(243, 240, 232, 0.1), rgba(243, 240, 232, 0.015) 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+</style>

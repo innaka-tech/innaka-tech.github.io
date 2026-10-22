@@ -15,7 +15,7 @@ const { index, eyebrow, title, italic, class: cls = '' } = Astro.props;
     <span class="font-mono text-[11px] text-accent">({index})</span>
     <span class="eyebrow">{eyebrow}</span>
   </div>
-  <h2 class="display text-[11vw] sm:text-[8vw] lg:col-span-9 lg:text-[4.8vw]" data-split>
+  <h2 class="display t-section lg:col-span-9" data-split>
     {title}
     {italic && <span class="serif-italic text-paper-2">{italic}</span>}
   </h2>

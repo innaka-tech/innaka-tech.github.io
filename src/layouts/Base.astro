@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { site } from '../data/site';
+import { site, companyName } from '../data/site';
 import Cursor from '../components/Cursor.astro';
 import Preloader from '../components/Preloader.astro';
 
@@ -27,7 +27,7 @@ const jsonLd = {
       '@type': 'Organization',
       '@id': `${site.url}/#org`,
       name: site.name,
-      legalName: site.legalName,
+      legalName: companyName,
       url: site.url,
       email: site.email,
       logo: new URL('/favicon.svg', Astro.site).toString(),
@@ -94,10 +94,15 @@ const jsonLd = {
       // Tandai JS aktif sedini mungkin supaya elemen yang dianimasikan
       // tidak berkedip sebelum skrip utama jalan.
       document.documentElement.classList.add('js');
+      // Preloader cukup sekali per sesi — kunjungan berikutnya langsung tampil.
+      try {
+        if (sessionStorage.getItem('innaka-seen')) document.documentElement.classList.add('seen');
+      } catch (e) {}
     </script>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="font-sans">
+    <a href="#main" class="skip-link">Langsung ke konten</a>
     {preloader && <Preloader />}
     <Cursor />
     <slot />

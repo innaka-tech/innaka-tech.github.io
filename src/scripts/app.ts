@@ -74,7 +74,13 @@ function splitWords(el: HTMLElement) {
 function initPreloader(): Promise<void> {
   const pre = document.getElementById('preloader');
   if (!pre) return Promise.resolve();
-  if (reduceMotion) {
+  const seen = document.documentElement.classList.contains('seen');
+  try {
+    sessionStorage.setItem('innaka-seen', '1');
+  } catch {
+    /* storage diblokir — preloader tetap jalan normal */
+  }
+  if (reduceMotion || seen) {
     pre.remove();
     return Promise.resolve();
   }
@@ -96,12 +102,12 @@ function initPreloader(): Promise<void> {
       })
       .to(obj, {
         v: 100,
-        duration: 1.6,
+        duration: 1.1,
         ease: 'power3.inOut',
         onUpdate: () => (count.textContent = String(Math.round(obj.v))),
       })
       .to(count, { yPercent: -20, opacity: 0, duration: 0.5, ease: 'power3.in' }, '-=0.2')
-      .to(pre, { yPercent: -100, duration: 1, ease: 'expo.inOut' }, '-=0.3');
+      .to(pre, { yPercent: -100, duration: 0.9, ease: 'expo.inOut' }, '-=0.3');
   });
 }
 
@@ -241,6 +247,29 @@ function initNav() {
     },
   });
 
+  // Progress bar di bawah nav
+  const progress = nav.querySelector<HTMLElement>('.nav-progress');
+  if (progress) {
+    gsap.to(progress, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.3 } });
+  }
+
+  // Scrollspy: tandai link section yang sedang dilihat
+  const navLinks = nav.querySelectorAll<HTMLAnchorElement>('.nav-link');
+  navLinks.forEach((link) => {
+    const sec = document.getElementById(link.dataset.section ?? '');
+    if (!sec) return;
+    ScrollTrigger.create({
+      trigger: sec,
+      start: 'top 50%',
+      end: 'bottom 50%',
+      onToggle: (self) => {
+        link.classList.toggle('is-active', self.isActive);
+        if (self.isActive) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      },
+    });
+  });
+
   // Light-section awareness: nav text flips when over [data-theme-light]
   document.querySelectorAll<HTMLElement>('[data-theme-light]').forEach((sec) => {
     ScrollTrigger.create({
@@ -257,46 +286,23 @@ function initNav() {
 /* ------------------------------------------------------------------ */
 function initStack() {
   if (reduceMotion) return;
-  const cards = gsap.utils.toArray<HTMLElement>('[data-stack-card]');
-  cards.forEach((card, i) => {
-    if (i === cards.length - 1) return;
-    const next = cards[i + 1];
-    gsap.to(card, {
-      scale: 0.94,
-      opacity: 0.55,
-      filter: 'blur(2px)',
-      transformOrigin: 'center top',
-      ease: 'none',
-      scrollTrigger: {
-        trigger: next,
-        start: 'top bottom',
-        end: 'top top+=100',
-        scrub: true,
-      },
-    });
-  });
-}
-
-/* ------------------------------------------------------------------ */
-/* Counters                                                            */
-/* ------------------------------------------------------------------ */
-function initCounters() {
-  if (reduceMotion) return;
-  document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
-    const target = parseFloat(el.dataset.count ?? '0');
-    const obj = { v: 0 };
-    el.textContent = '0';
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 85%',
-      once: true,
-      onEnter: () =>
-        gsap.to(obj, {
-          v: target,
-          duration: 1.6,
-          ease: 'power3.out',
-          onUpdate: () => (el.textContent = String(Math.round(obj.v))),
-        }),
+  // Sama dengan media query .stack-card di CSS: hanya saat kartu sticky.
+  gsap.matchMedia().add('(min-width: 1024px) and (min-height: 760px)', () => {
+    const cards = gsap.utils.toArray<HTMLElement>('[data-stack-card]');
+    cards.forEach((card, i) => {
+      if (i === cards.length - 1) return;
+      gsap.to(card, {
+        scale: 0.95,
+        opacity: 0.45,
+        transformOrigin: 'center top',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: cards[i + 1],
+          start: 'top bottom',
+          end: 'top top+=100',
+          scrub: true,
+        },
+      });
     });
   });
 }
@@ -325,6 +331,64 @@ function initProcess() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Hero visual — kartu masuk bertahap + parallax mengikuti mouse         */
+/* ------------------------------------------------------------------ */
+function initHeroVisual(intro: gsap.core.Timeline) {
+  const wrap = document.querySelector<HTMLElement>('[data-hero-visual]');
+  if (!wrap || reduceMotion) return;
+  const cards = wrap.querySelectorAll<HTMLElement>('.hv-card');
+
+  // Intro memakai yPercent; parallax mouse memakai x/y — properti terpisah supaya tidak bentrok.
+  gsap.set(cards, { opacity: 0, yPercent: 18, rotate: (i) => [3, -4, 2][i] ?? 0 });
+  gsap.set(wrap.querySelectorAll('.hv-bar'), { scaleY: 0 });
+  gsap.set(wrap.querySelectorAll('.hv-fill'), { scaleX: 0 });
+
+  intro
+    .to(cards, { opacity: 1, yPercent: 0, rotate: 0, duration: 1.4, ease: EASE, stagger: 0.14 }, 0.45)
+    .to(wrap.querySelectorAll('.hv-bar'), { scaleY: 1, duration: 1, ease: 'power3.out', stagger: 0.05 }, 0.8)
+    .to(wrap.querySelectorAll('.hv-fill'), { scaleX: 1, duration: 1.2, ease: 'power3.out', stagger: 0.1 }, 1);
+
+  if (finePointer) {
+    const movers = Array.from(cards).map((el) => ({
+      depth: parseFloat(el.dataset.depth ?? '1'),
+      x: gsap.quickTo(el, 'x', { duration: 1.2, ease: 'power3' }),
+      y: gsap.quickTo(el, 'y', { duration: 1.2, ease: 'power3' }),
+    }));
+    window.addEventListener('mousemove', (e) => {
+      const nx = e.clientX / window.innerWidth - 0.5;
+      const ny = e.clientY / window.innerHeight - 0.5;
+      movers.forEach((m) => {
+        m.x(nx * 28 * m.depth);
+        m.y(ny * 22 * m.depth);
+      });
+    });
+  }
+
+  // Ikut memudar saat hero di-scroll lewat
+  gsap.to(wrap, {
+    yPercent: -12,
+    opacity: 0,
+    ease: 'none',
+    scrollTrigger: { trigger: '#top', start: 'top top', end: 'bottom top', scrub: true },
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/* Mockup produk                                                       */
+/* ------------------------------------------------------------------ */
+function initMockups() {
+  if (reduceMotion) return;
+  document.querySelectorAll<HTMLElement>('[data-mockup]').forEach((m) => {
+    const rows = m.querySelectorAll('.mock-row');
+    const cells = m.querySelectorAll('.mock-cell');
+    const tl = gsap.timeline({ scrollTrigger: { trigger: m, start: 'top 85%', once: true } });
+    if (rows.length) tl.from(rows, { opacity: 0, y: 14, duration: 0.8, ease: EASE, stagger: 0.08 }, 0.1);
+    if (cells.length)
+      tl.from(cells, { scale: 0.4, opacity: 0, duration: 0.6, ease: 'back.out(2)', stagger: { each: 0.018, from: 'random' } }, 0);
+  });
+}
+
+/* ------------------------------------------------------------------ */
 /* Parallax helpers                                                    */
 /* ------------------------------------------------------------------ */
 function initParallax() {
@@ -334,7 +398,8 @@ function initParallax() {
     gsap.from(word, {
       yPercent: 40,
       ease: 'none',
-      scrollTrigger: { trigger: word, start: 'top bottom', end: 'bottom bottom', scrub: true },
+      // end 'max' → pasti selesai (yPercent 0) tepat saat halaman mentok bawah
+      scrollTrigger: { trigger: word, start: 'top bottom', end: 'max', scrub: true },
     });
   }
   const orb = document.querySelector('.cta-orb');
@@ -444,7 +509,12 @@ function initForm() {
     e.preventDefault();
     const key = (form.elements.namedItem('access_key') as HTMLInputElement).value;
     if (!key) {
-      status.textContent = 'Form belum aktif — hubungi kami via WhatsApp atau email.';
+      // Belum ada Web3Forms key → buka aplikasi email dengan pesan yang sudah terisi.
+      const fd = new FormData(form);
+      const body = `Nama: ${fd.get('name')}\nKontak: ${fd.get('contact')}\n\n${fd.get('message')}`;
+      const subject = `Konsultasi dari innaka.dev — ${fd.get('name')}`;
+      window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      status.textContent = 'Membuka aplikasi email Anda…';
       return;
     }
     const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
@@ -477,13 +547,14 @@ async function boot() {
 
   // Siapkan reveal dulu (teks tersembunyi), mainkan intro setelah preloader
   const intro = initReveals();
+  initHeroVisual(intro);
   await initPreloader();
   intro.play();
 
   initHero();
   initStack();
-  initCounters();
   initProcess();
+  initMockups();
   initParallax();
 
   // Fonts load → layout may shift; refresh triggers

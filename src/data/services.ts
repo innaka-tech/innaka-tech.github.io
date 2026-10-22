@@ -113,30 +113,26 @@ export const products: Product[] = [
 
 export const reasons = [
   {
-    stat: '1',
-    suffix: ' tim',
+    icon: 'stack',
     title: 'Satu partner untuk semua',
-    desc: 'Website, aplikasi, sistem, AI, hingga perawatan — tidak perlu koordinasi dengan lima vendor berbeda.',
+    desc: 'Website, aplikasi, sistem, AI, hingga perawatan — tanpa repot koordinasi dengan banyak vendor berbeda.',
   },
   {
-    stat: '0',
-    suffix: ' rekrut',
+    icon: 'users',
     title: 'Tanpa perlu rekrut',
     desc: 'Tim ahli IT on-demand. Bayar untuk hasil, bukan untuk kursi kosong di kantor.',
   },
   {
-    stat: '100',
-    suffix: '%',
+    icon: 'growth',
     title: 'Siap tumbuh',
-    desc: 'Arsitektur dirancang untuk skala — mulai dari satu toko sampai ratusan cabang.',
+    desc: 'Arsitektur dirancang untuk skala — dari satu toko hingga banyak cabang, tanpa bangun ulang.',
   },
   {
-    stat: '24',
-    suffix: '/7',
+    icon: 'pin',
     title: 'Dukungan lokal',
-    desc: 'Tim di Indonesia yang paham konteks bisnis Anda, bahasa Anda, dan jam kerja Anda.',
+    desc: 'Tim di Indonesia yang paham konteks bisnis, bahasa, dan cara kerja Anda.',
   },
-];
+] as const;
 
 export const process = [
   { step: '01', title: 'Konsultasi', desc: 'Kami dengarkan masalah dan tujuan bisnis Anda. Gratis, tanpa komitmen.' },

@@ -18,10 +18,10 @@ import SectionHead from './SectionHead.astro';
       <span class="process-line absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-accent" aria-hidden="true"></span>
       {
         process.map((p) => (
-          <li class="process-item grid gap-4 border-b border-line py-8 pl-8 sm:grid-cols-12 sm:gap-8 sm:py-10 sm:pl-10 lg:py-12">
-            <span class="font-mono text-[12px] text-accent sm:col-span-2">{p.step}</span>
-            <h3 class="display text-[8vw] sm:col-span-4 sm:text-[3.2vw] lg:text-[2.2vw]">{p.title}</h3>
-            <p class="text-[16px] leading-relaxed text-muted sm:col-span-6">{p.desc}</p>
+          <li class="process-item group grid gap-3 border-b border-line py-8 pl-8 sm:grid-cols-[3.5rem_minmax(0,1fr)_minmax(0,1.35fr)] sm:items-baseline sm:gap-8 sm:py-10 sm:pl-10 lg:py-12">
+            <span class="font-mono text-[12px] text-accent">{p.step}</span>
+            <h3 class="display t-step transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1">{p.title}</h3>
+            <p class="text-[16px] leading-relaxed text-muted">{p.desc}</p>
           </li>
         ))
       }

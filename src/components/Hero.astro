@@ -1,6 +1,8 @@
 ---
-import { whatsappUrl } from '../data/site';
+import { contactUrl, contactLinkAttrs, hasWhatsapp } from '../data/site';
 import Icons from './Icons.astro';
+
+const bars = [38, 52, 44, 66, 58, 74, 90];
 ---
 
 <section id="top" class="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden pt-[var(--nav-h)]">
@@ -13,24 +15,96 @@ import Icons from './Icons.astro';
   >
   </div>
 
+  <!-- Visual: ilustrasi sistem bisnis yang saling terhubung (dekoratif) -->
+  <div class="hero-visual pointer-events-none absolute right-8 top-[calc(var(--nav-h)+4vh)] w-[400px] lg:right-12 2xl:right-[calc((100vw-1440px)/2+48px)]" aria-hidden="true">
+    <div class="relative h-[440px]" data-hero-visual>
+      <!-- Kartu penjualan -->
+      <div class="hv-card absolute right-0 top-0 w-[320px] rounded-2xl border border-line bg-ink-2/80 p-5 backdrop-blur-md" data-depth="0.6">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">Penjualan hari ini</span>
+          <span class="flex items-center gap-1.5 font-mono text-[10px] text-accent">
+            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-accent"></span> Live
+          </span>
+        </div>
+        <div class="mt-3 flex items-baseline gap-2">
+          <span class="text-[30px] font-medium tracking-tight">Rp 12,4<span class="text-muted">jt</span></span>
+          <span class="rounded-full bg-accent/10 px-2 py-0.5 font-mono text-[10px] text-accent">+18%</span>
+        </div>
+        <div class="mt-4 flex h-[72px] items-end gap-2">
+          {bars.map((h, i) => (
+            <span class="hv-bar flex-1 origin-bottom rounded-[4px]" style={`height:${h}%; background:${i === bars.length - 1 ? 'var(--color-accent)' : 'rgba(243,240,232,0.12)'}`}></span>
+          ))}
+        </div>
+        <div class="mt-2 flex justify-between font-mono text-[9px] text-paper/30">
+          <span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span>
+        </div>
+      </div>
+
+      <!-- Notifikasi pesanan -->
+      <div class="hv-card absolute left-0 top-[200px] flex w-[290px] items-center gap-3 rounded-2xl border border-line bg-ink-3/90 p-3.5 backdrop-blur-md" data-depth="1.1">
+        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#25D366]/15 text-[#25D366]">
+          <Icons name="whatsapp" class="h-4.5 w-4.5" />
+        </span>
+        <div class="min-w-0">
+          <p class="truncate text-[13px] font-medium">Pesanan baru #1042</p>
+          <p class="truncate text-[12px] text-muted">Masuk via WhatsApp · otomatis ke kasir</p>
+        </div>
+      </div>
+
+      <!-- Stok tersinkron -->
+      <div class="hv-card absolute bottom-0 right-6 w-[260px] rounded-2xl border border-line bg-ink-2/80 p-4 backdrop-blur-md" data-depth="0.8">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">Stok tersinkron</span>
+          <span class="grid h-5 w-5 place-items-center rounded-full bg-accent text-ink">
+            <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m3.5 8.5 3 3 6-7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </span>
+        </div>
+        <ul class="mt-3 space-y-2.5 text-[12px]">
+          {[
+            ['Gudang pusat', 86],
+            ['Cabang Barat', 62],
+            ['Cabang Timur', 44],
+          ].map(([name, v]) => (
+            <li>
+              <div class="mb-1 flex justify-between"><span class="text-paper/80">{name}</span><span class="font-mono text-paper/40">{v}%</span></div>
+              <div class="h-1 overflow-hidden rounded-full bg-paper/10">
+                <span class="hv-fill block h-full origin-left rounded-full bg-paper/70" style={`width:${v}%`}></span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Garis penghubung -->
+      <svg class="absolute inset-0 -z-10 h-full w-full" viewBox="0 0 400 440" fill="none">
+        <path class="hv-link" d="M150 230 C 150 170, 210 150, 240 150" stroke="rgba(201,242,76,.35)" stroke-dasharray="3 5"></path>
+        <path class="hv-link" d="M200 262 C 240 262, 260 300, 270 330" stroke="rgba(201,242,76,.35)" stroke-dasharray="3 5"></path>
+      </svg>
+    </div>
+  </div>
+
   <div class="container-x relative pb-10 sm:pb-14 lg:pb-16">
-    <div class="mb-10 flex items-center gap-4 sm:mb-14" data-reveal>
-      <span class="h-2 w-2 rounded-full bg-accent"></span>
-      <p class="eyebrow">Jakarta, Indonesia — Studio teknologi & AI</p>
+    <div class="mb-8 flex items-center gap-3 sm:mb-12" data-reveal>
+      <span class="relative flex h-2 w-2">
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60"></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
+      </span>
+      <p class="eyebrow">Studio teknologi & AI<span class="hidden sm:inline"> — menerima proyek baru</span></p>
     </div>
 
-    <h1 class="display max-w-[14ch] text-[13.5vw] sm:text-[10.5vw] lg:text-[7.4vw]" data-split data-split-delay="0.15">
+    <h1 class="display t-hero max-w-[13ch]" data-split data-split-delay="0.15">
       Solusi digital
       <span class="serif-italic text-accent">&amp; AI</span>
       untuk bisnis yang siap tumbuh.
     </h1>
 
-    <div class="mt-10 grid gap-8 border-t border-line pt-8 sm:mt-14 lg:grid-cols-12 lg:gap-12">
-      <p class="text-balance text-[17px] leading-relaxed text-muted lg:col-span-5 lg:col-start-1 lg:text-[19px]" data-reveal data-reveal-delay="0.5">
+    <div class="mt-10 grid items-end gap-8 border-t border-line pt-8 sm:mt-14 lg:grid-cols-12 lg:gap-12">
+      <p class="max-w-[52ch] text-pretty text-[17px] leading-relaxed text-muted lg:col-span-6 lg:text-[19px]" data-reveal data-reveal-delay="0.5">
         Website, aplikasi mobile, sistem bisnis terintegrasi, dan konsultasi AI — dibangun oleh satu tim yang paham bisnis Indonesia.
       </p>
-      <div class="flex flex-wrap items-center gap-3 lg:col-span-6 lg:col-start-7 lg:justify-end" data-reveal data-reveal-delay="0.6">
-        <a href={whatsappUrl} target="_blank" rel="noopener" class="btn btn-primary" data-magnetic data-cursor="hide">
+      <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:col-span-6 lg:justify-end" data-reveal data-reveal-delay="0.6">
+        <a href={contactUrl()} {...contactLinkAttrs} class="btn btn-primary" data-magnetic data-cursor="hide">
+          {hasWhatsapp ? <Icons name="whatsapp" class="h-4 w-4" /> : null}
           Konsultasi Gratis
           <span class="btn-arrow"><Icons name="arrow" class="h-3.5 w-3.5" /></span>
         </a>
@@ -42,8 +116,26 @@ import Icons from './Icons.astro';
     </div>
   </div>
 
+  <!-- Badge berputar -->
+  <a
+    href="#layanan"
+    class="spin-badge absolute bottom-[calc(50%-40px)] right-12 h-[112px] w-[112px]"
+    aria-label="Gulir ke layanan"
+    data-cursor="hide"
+  >
+    <svg class="spin-text absolute inset-0 h-full w-full" viewBox="0 0 100 100" aria-hidden="true">
+      <defs><path id="badge-circle" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"></path></defs>
+      <text class="fill-paper/70" style="font: 500 8.4px var(--font-mono); text-transform: uppercase">
+        <textPath href="#badge-circle" textLength="236" lengthAdjust="spacing">Jelajahi layanan · Scroll ·</textPath>
+      </text>
+    </svg>
+    <span class="m-auto grid h-11 w-11 place-items-center rounded-full bg-accent text-ink">
+      <Icons name="arrow-right" class="h-4 w-4 rotate-90" />
+    </span>
+  </a>
+
   <!-- Scroll hint -->
-  <div class="pointer-events-none absolute bottom-6 right-5 hidden items-center gap-3 sm:right-8 lg:right-12 lg:flex" data-reveal data-reveal-delay="1">
+  <div class="pointer-events-none absolute bottom-6 right-5 hidden items-center gap-3 sm:right-8 lg:right-12 xl:flex" data-reveal data-reveal-delay="1">
     <span class="eyebrow">Scroll</span>
     <span class="relative block h-10 w-px overflow-hidden bg-line">
       <span class="scroll-hint absolute inset-x-0 top-0 h-1/2 bg-paper"></span>
@@ -61,6 +153,38 @@ import Icons from './Icons.astro';
     }
     100% {
       transform: translateY(200%);
+    }
+  }
+  /* Visual tampil saat ada ruang: desktop lebar, atau tablet portrait yang tinggi.
+     Di luar itu (laptop kecil) diganti badge berputar. */
+  .hero-visual,
+  .spin-badge {
+    display: none;
+  }
+  @media (min-width: 1280px), (min-width: 768px) and (min-height: 1000px) {
+    .hero-visual {
+      display: block;
+    }
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) and (max-height: 999px) {
+    .spin-badge {
+      display: grid;
+    }
+  }
+  .spin-text {
+    animation: spin 14s linear infinite;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .hv-link {
+    animation: dash 1.6s linear infinite;
+  }
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -16;
     }
   }
 </style>

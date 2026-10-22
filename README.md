@@ -23,6 +23,13 @@ Semua teks dan konfigurasi ada di `src/data/`, bukan di komponen:
 | `src/data/site.ts` | Nama, email, nomor WhatsApp, alamat, sosial media, feature flags |
 | `src/data/services.ts` | 4 pilar layanan, produk (Tokopilot POS, WMS-Simple), alasan, proses, FAQ |
 
+### Kontak (wajib diisi)
+
+Di `src/data/site.ts`:
+
+- `whatsapp` — nomor WA bisnis format internasional tanpa `+` (mis. `628123456789`). **Selama kosong, semua tombol "Konsultasi" dan "Minta Demo" otomatis memakai email**, jadi tidak ada tombol mati.
+- `legalName`, `address`, `nib` — tampil di footer & data terstruktur (JSON-LD). `legalName` kosong → footer memakai `name`.
+
 ### Feature flags (`site.flags`)
 
 - `hostingEnabled` — set `true` setelah KBLI 63112 aktif. Selama `false`, item "Hosting terkelola" tampil dengan badge **Segera hadir**.
@@ -30,7 +37,7 @@ Semua teks dan konfigurasi ada di `src/data/`, bukan di komponen:
 
 ### Form kontak
 
-Form memakai [Web3Forms](https://web3forms.com) (gratis, tanpa backend). Daftar, lalu isi `web3formsKey` di `src/data/site.ts`. Sebelum diisi, form menampilkan pesan agar pengunjung menghubungi via WhatsApp/email.
+Form memakai [Web3Forms](https://web3forms.com) (gratis, tanpa backend). Daftar, lalu isi `web3formsKey` di `src/data/site.ts`. Sebelum diisi, tombol kirim membuka aplikasi email pengunjung dengan pesan yang sudah terisi.
 
 ### OG image
 
