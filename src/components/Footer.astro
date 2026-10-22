@@ -48,7 +48,12 @@ const socials = [
         <p class="eyebrow mb-5">Kontak</p>
         <ul class="flex flex-col gap-3 text-[15px] text-paper/80">
           <li><a href={`mailto:${site.email}`} class="link-ul" data-cursor="small">{site.email}</a></li>
-          <li class="text-muted">{site.address}</li>
+          <li><a href={`tel:+${site.whatsapp}`} class="link-ul" data-cursor="small">{site.phone}</a></li>
+          <li>
+            <a href={site.mapsUrl} target="_blank" rel="noopener" class="text-[14px] leading-relaxed text-muted transition-colors hover:text-paper" data-cursor="small">
+              {site.addressFull.street}, {site.addressFull.city}, {site.addressFull.region} {site.addressFull.postalCode}
+            </a>
+          </li>
         </ul>
       </div>
     </div>

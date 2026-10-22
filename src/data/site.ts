@@ -4,7 +4,7 @@
 export const site = {
   name: 'Innaka',
   /** Nama badan usaha resmi. Kosongkan → footer memakai `name`. */
-  legalName: '', // TODO: isi nama legal PT, mis. 'PT ...'
+  legalName: 'Innaka Tech', // ganti ke nama PT resmi bila sudah ada
   tagline: 'Solusi digital & AI untuk bisnis yang siap tumbuh.',
   description:
     'Innaka membangun website, aplikasi mobile, sistem bisnis terintegrasi, dan solusi AI untuk bisnis Indonesia. Konsultasi teknologi, software siap pakai (Tokopilot POS, WMS-Simple), hingga perawatan sistem.',
@@ -15,9 +15,21 @@ export const site = {
    * Nomor WhatsApp bisnis, format internasional tanpa "+" (mis. '628123456789').
    * Selama kosong, semua tombol WhatsApp otomatis beralih ke email.
    */
-  whatsapp: '', // TODO: isi nomor WA bisnis
+  whatsapp: '6281218191866',
+  /** Nomor telepon untuk ditampilkan (format lokal) */
+  phone: '0812-1819-1866',
   whatsappMessage: 'Halo Innaka, saya ingin konsultasi tentang kebutuhan digital bisnis saya.',
-  address: 'Indonesia', // TODO: kota / alamat lengkap
+  /** Ringkas — untuk tampilan pendek */
+  address: 'Bekasi, Jawa Barat',
+  /** Lengkap — sesuai Google Business Profile */
+  addressFull: {
+    street: 'Jl. H. Mahir No.25, RT.13/RW.5, Jatikramat, Kec. Jatiasih',
+    city: 'Kota Bekasi',
+    region: 'Jawa Barat',
+    postalCode: '17421',
+    country: 'ID',
+  },
+  mapsUrl: 'https://maps.app.goo.gl/49P9Yo37Zj4upMP2A',
   nib: '', // TODO: isi NIB jika ingin tampil di footer
   social: {
     instagram: 'https://instagram.com/innaka.dev',

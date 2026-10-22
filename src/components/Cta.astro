@@ -61,14 +61,26 @@ const assurances = [
           }
         </ul>
 
-        <dl class="grid grid-cols-2 gap-6 border-t border-line pt-8 text-[15px]">
+        <dl class="grid gap-6 border-t border-line pt-8 text-[15px] sm:grid-cols-2">
+          <div>
+            <dt class="eyebrow mb-2">Telepon / WhatsApp</dt>
+            <dd><a href={`tel:+${site.whatsapp}`} class="link-ul text-paper" data-cursor="small">{site.phone}</a></dd>
+          </div>
           <div>
             <dt class="eyebrow mb-2">Email</dt>
             <dd><a href={`mailto:${site.email}`} class="link-ul text-paper" data-cursor="small">{site.email}</a></dd>
           </div>
-          <div>
-            <dt class="eyebrow mb-2">Lokasi</dt>
-            <dd class="text-paper/80">{site.address}</dd>
+          <div class="sm:col-span-2">
+            <dt class="eyebrow mb-2">Kantor</dt>
+            <dd>
+              <a href={site.mapsUrl} target="_blank" rel="noopener" class="group inline-flex items-start gap-2 text-paper/80 hover:text-paper" data-cursor="small">
+                <span>
+                  {site.addressFull.street},<br />
+                  {site.addressFull.city}, {site.addressFull.region} {site.addressFull.postalCode}
+                </span>
+                <Icons name="arrow" class="mt-1 h-3.5 w-3.5 shrink-0 text-paper/40 transition-colors group-hover:text-accent" />
+              </a>
+            </dd>
           </div>
         </dl>
       </div>

@@ -24,7 +24,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Organization',
+      '@type': ['Organization', 'LocalBusiness'],
       '@id': `${site.url}/#org`,
       name: site.name,
       legalName: companyName,
@@ -32,7 +32,16 @@ const jsonLd = {
       email: site.email,
       logo: new URL('/favicon.svg', Astro.site).toString(),
       sameAs: Object.values(site.social),
-      address: { '@type': 'PostalAddress', addressLocality: site.address, addressCountry: 'ID' },
+      telephone: `+${site.whatsapp}`,
+      hasMap: site.mapsUrl,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: site.addressFull.street,
+        addressLocality: site.addressFull.city,
+        addressRegion: site.addressFull.region,
+        postalCode: site.addressFull.postalCode,
+        addressCountry: site.addressFull.country,
+      },
     },
     {
       '@type': 'WebSite',
