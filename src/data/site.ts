@@ -6,8 +6,30 @@ export const site = {
   /** Nama badan usaha resmi. Kosongkan → footer memakai `name`. */
   legalName: 'Innaka Tech', // ganti ke nama PT resmi bila sudah ada
   tagline: 'Solusi digital & AI untuk bisnis yang siap tumbuh.',
+  /** Judul halaman utama (≤ 60 karakter, memuat kata kunci utama) */
+  seoTitle: 'Innaka Tech | Software House Bekasi: Website, Aplikasi & AI',
+  /** Meta description (≤ 160 karakter) */
   description:
-    'Innaka membangun website, aplikasi mobile, sistem bisnis terintegrasi, dan solusi AI untuk bisnis Indonesia. Konsultasi teknologi, software siap pakai (Tokopilot POS, WMS-Simple), hingga perawatan sistem.',
+    'Innaka Tech, software house di Bekasi: jasa pembuatan website, aplikasi mobile, sistem bisnis terintegrasi & AI, plus Tokopilot POS dan WMS-Simple.',
+  /**
+   * Definisi entitas satu-dua kalimat. Dipakai di halaman, JSON-LD, dan llms.txt
+   * supaya mesin pencari & AI mengutip deskripsi yang sama persis.
+   */
+  about:
+    'Innaka Tech adalah software house di Bekasi, Jawa Barat, yang membangun website, aplikasi mobile, sistem bisnis terintegrasi, dan solusi AI untuk UMKM hingga perusahaan di Indonesia. Innaka juga mengembangkan software siap pakai Tokopilot POS (kasir multi-cabang) dan WMS-Simple (manajemen gudang).',
+  /** Topik keahlian — untuk JSON-LD knowsAbout */
+  knowsAbout: [
+    'Pembuatan website',
+    'Pengembangan aplikasi mobile Android & iOS',
+    'Sistem ERP dan manajemen bisnis',
+    'Point of Sale (POS)',
+    'Warehouse Management System (WMS)',
+    'Integrasi payment gateway, marketplace, ekspedisi, dan WhatsApp API',
+    'Chatbot AI dan otomasi dokumen',
+    'Otomasi alur kerja',
+    'Konsultasi teknologi dan audit sistem',
+    'Migrasi data dan perawatan sistem',
+  ],
   url: 'https://innaka.dev',
   locale: 'id_ID',
   email: 'halo@innaka.dev',

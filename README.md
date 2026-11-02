@@ -39,6 +39,15 @@ Di `src/data/site.ts`:
 
 Form memakai [Web3Forms](https://web3forms.com) (gratis, tanpa backend). Daftar, lalu isi `web3formsKey` di `src/data/site.ts`. Sebelum diisi, tombol kirim membuka aplikasi email pengunjung dengan pesan yang sudah terisi.
 
+### SEO & GEO
+
+- Title, meta description, dan kalimat definisi entitas (`seoTitle`, `description`, `about`) ada di `src/data/site.ts`.
+- Structured data (JSON-LD) dibangun otomatis di `src/data/schema.ts` dari data layanan, produk, dan FAQ: Organization/ProfessionalService, OfferCatalog, SoftwareApplication, FAQPage.
+- `/llms.txt` dibuat otomatis (`src/pages/llms.txt.ts`) — ringkasan Markdown untuk mesin AI.
+- `public/robots.txt` mengizinkan crawler mesin pencari & AI (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, dll.).
+- Jaga NAP (nama, alamat, telepon) **identik** dengan Google Business Profile.
+- Ikon PNG dibuat dari `public/favicon.svg`: `node scripts/make-icons.mjs`.
+
 ### OG image
 
 `public/og.png` dibuat dari `scripts/og.html`:

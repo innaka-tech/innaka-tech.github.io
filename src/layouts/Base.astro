@@ -1,70 +1,24 @@
 ---
 import '../styles/global.css';
-import { site, companyName } from '../data/site';
+import { site } from '../data/site';
+import { homeGraph, baseGraph } from '../data/schema';
 import Cursor from '../components/Cursor.astro';
 import Preloader from '../components/Preloader.astro';
 
 interface Props {
   title?: string;
   description?: string;
-  /** Tampilkan preloader (hanya di halaman utama) */
-  preloader?: boolean;
+  /** Halaman utama: preloader + structured data lengkap (layanan, produk, FAQ) */
+  home?: boolean;
+  /** Jangan diindeks (mis. 404) */
+  noindex?: boolean;
 }
 
-const {
-  title = `${site.name} — ${site.tagline}`,
-  description = site.description,
-  preloader = false,
-} = Astro.props;
+const { title = site.seoTitle, description = site.description, home = false, noindex = false } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': ['Organization', 'LocalBusiness'],
-      '@id': `${site.url}/#org`,
-      name: site.name,
-      legalName: companyName,
-      url: site.url,
-      email: site.email,
-      logo: new URL('/favicon.svg', Astro.site).toString(),
-      sameAs: Object.values(site.social),
-      telephone: `+${site.whatsapp}`,
-      hasMap: site.mapsUrl,
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: site.addressFull.street,
-        addressLocality: site.addressFull.city,
-        addressRegion: site.addressFull.region,
-        postalCode: site.addressFull.postalCode,
-        addressCountry: site.addressFull.country,
-      },
-    },
-    {
-      '@type': 'WebSite',
-      '@id': `${site.url}/#website`,
-      url: site.url,
-      name: site.name,
-      inLanguage: 'id-ID',
-      publisher: { '@id': `${site.url}/#org` },
-    },
-    ...[
-      'Pengembangan Website',
-      'Pengembangan Aplikasi Mobile',
-      'Sistem Bisnis Terintegrasi',
-      'Konsultasi Teknologi & AI',
-      'Perawatan & Dukungan Sistem',
-    ].map((name) => ({
-      '@type': 'Service',
-      name,
-      provider: { '@id': `${site.url}/#org` },
-      areaServed: 'ID',
-    })),
-  ],
-};
+const jsonLd = home ? homeGraph(title, description) : baseGraph();
 ---
 
 <!doctype html>
@@ -74,18 +28,33 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="id-ID" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" title="LLM summary" href="/llms.txt" />
     <meta name="theme-color" content="#0b0b0f" />
+    <meta name="author" content={site.legalName || site.name} />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Lokasi bisnis (local SEO) -->
+    <meta name="geo.region" content="ID-JB" />
+    <meta name="geo.placename" content="Bekasi" />
+
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={site.name} />
+    <meta property="og:site_name" content={site.legalName || site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Innaka Tech — Solusi digital & AI untuk bisnis yang siap tumbuh" />
     <meta property="og:locale" content={site.locale} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -112,7 +81,7 @@ const jsonLd = {
   </head>
   <body class="font-sans">
     <a href="#main" class="skip-link">Langsung ke konten</a>
-    {preloader && <Preloader />}
+    {home && <Preloader />}
     <Cursor />
     <slot />
     <script>

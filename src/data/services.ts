@@ -157,10 +157,22 @@ export const faqs = [
   },
   {
     q: 'Bisnis saya masih kecil. Apakah Innaka cocok?',
-    a: 'Sangat cocok. Banyak klien kami memulai dari satu toko atau tim kecil. Kami bantu memilih solusi yang sesuai anggaran hari ini namun tetap siap berkembang.',
+    a: 'Sangat cocok. Banyak bisnis memulai dari satu toko atau tim kecil. Kami bantu memilih solusi yang sesuai anggaran hari ini namun tetap siap berkembang.',
   },
   {
     q: 'Apakah data bisnis saya aman?',
     a: 'Keamanan dan kepemilikan data adalah prioritas. Data sepenuhnya milik Anda, dengan backup otomatis dan praktik keamanan standar industri. Kami juga membantu migrasi data dari sistem lama tanpa kehilangan.',
+  },
+  {
+    q: 'Di mana lokasi Innaka Tech? Apakah melayani klien di luar Bekasi?',
+    a: 'Kantor Innaka Tech berada di Jatiasih, Kota Bekasi, Jawa Barat. Konsultasi, rapat progres, dan serah terima bisa dilakukan secara online, sehingga kami dapat melayani bisnis di Jabodetabek maupun kota lain di Indonesia.',
+  },
+  {
+    q: 'Apa itu Tokopilot POS?',
+    a: 'Tokopilot POS adalah aplikasi kasir (point of sale) buatan Innaka untuk toko, kafe, dan bisnis multi-cabang. Fiturnya mencakup transaksi kasir, manajemen stok dan promo, laporan penjualan real-time, serta koneksi ke marketplace.',
+  },
+  {
+    q: 'Apa itu WMS-Simple?',
+    a: 'WMS-Simple adalah sistem manajemen gudang (warehouse management system) buatan Innaka untuk mencatat barang masuk dan keluar, lokasi rak dan batch, stock opname, hingga integrasi dengan ekspedisi — agar stok akurat dan pengiriman lebih cepat.',
   },
 ];
