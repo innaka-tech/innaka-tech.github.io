@@ -62,6 +62,7 @@ export const services: Service[] = [
     items: [
       { title: 'Tokopilot POS', href: '/produk/tokopilot-pos/', desc: 'Kasir pintar untuk toko dan multi-cabang, laporan penjualan real-time.' },
       { title: 'WMS-Simple', href: '/produk/wms-simple/', desc: 'Gudang rapi, stok akurat, pengiriman lebih cepat.' },
+      { title: 'Invora', href: '/produk/invora/', desc: 'Penagihan & follow-up piutang — SPP, invoice, angsuran, termin proyek.' },
     ],
   },
   {
@@ -88,6 +89,8 @@ export const services: Service[] = [
 
 export type Product = {
   id: string;
+  /** slug halaman detail /produk/<slug>/ */
+  slug: string;
   name: string;
   tag: string;
   headline: string;
@@ -99,6 +102,7 @@ export type Product = {
 export const products: Product[] = [
   {
     id: 'tokopilot',
+    slug: 'tokopilot-pos',
     name: 'Tokopilot POS',
     tag: 'Point of Sale',
     headline: 'Kasir pintar untuk toko dan multi-cabang.',
@@ -108,12 +112,23 @@ export const products: Product[] = [
   },
   {
     id: 'wms-simple',
+    slug: 'wms-simple',
     name: 'WMS-Simple',
     tag: 'Warehouse Management',
     headline: 'Gudang rapi, stok akurat, pengiriman lebih cepat.',
     desc: 'Dari barang masuk hingga barang keluar — setiap pergerakan tercatat. Tidak ada lagi stok hantu dan pengiriman terlambat.',
     features: ['Inbound & outbound tracking', 'Stock opname cepat', 'Lokasi rak & batch', 'Integrasi ekspedisi'],
     accent: 'var(--color-amber)',
+  },
+  {
+    id: 'invora',
+    slug: 'invora',
+    name: 'Invora',
+    tag: 'Penagihan & Follow-up Piutang',
+    headline: 'Tagihan terpantau, follow-up tidak terlupa.',
+    desc: 'Kelola SPP, invoice, angsuran, dan termin proyek — lalu tindak lanjuti lewat WhatsApp dan telepon dari satu antrian kerja harian.',
+    features: ['Tagihan bulanan, sekali & cepat', 'Antrian follow-up harian', 'WhatsApp click-to-chat & telepon', 'Laporan tunggakan & umur piutang'],
+    accent: 'var(--color-teal)',
   },
 ];
 

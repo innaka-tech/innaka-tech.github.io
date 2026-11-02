@@ -10,13 +10,13 @@ export const site = {
   seoTitle: 'Innaka Tech | Software House Bekasi: Website, Aplikasi & AI',
   /** Meta description (≤ 160 karakter) */
   description:
-    'Innaka Tech, software house di Bekasi: jasa pembuatan website, aplikasi mobile, sistem bisnis terintegrasi & AI, plus Tokopilot POS dan WMS-Simple.',
+    'Software house di Bekasi: jasa pembuatan website, aplikasi mobile, sistem bisnis & AI, plus produk Tokopilot POS, WMS-Simple, dan Invora.',
   /**
    * Definisi entitas satu-dua kalimat. Dipakai di halaman, JSON-LD, dan llms.txt
    * supaya mesin pencari & AI mengutip deskripsi yang sama persis.
    */
   about:
-    'Innaka Tech adalah software house di Bekasi, Jawa Barat, yang membangun website, aplikasi mobile, sistem bisnis terintegrasi, dan solusi AI untuk UMKM hingga perusahaan di Indonesia. Innaka juga mengembangkan produk software Tokopilot POS (kasir multi-cabang) dan WMS-Simple (manajemen gudang).',
+    'Innaka Tech adalah software house di Bekasi, Jawa Barat, yang membangun website, aplikasi mobile, sistem bisnis terintegrasi, dan solusi AI untuk UMKM hingga perusahaan di Indonesia. Innaka juga mengembangkan produk software Tokopilot POS (kasir multi-cabang), WMS-Simple (manajemen gudang), dan Invora (penagihan & follow-up piutang).',
   /** Topik keahlian — untuk JSON-LD knowsAbout */
   knowsAbout: [
     'Pembuatan website',
@@ -24,6 +24,7 @@ export const site = {
     'Sistem ERP dan manajemen bisnis',
     'Point of Sale (POS)',
     'Warehouse Management System (WMS)',
+    'Penagihan dan follow-up piutang',
     'Integrasi payment gateway, marketplace, ekspedisi, dan WhatsApp API',
     'Chatbot AI dan otomasi dokumen',
     'Otomasi alur kerja',

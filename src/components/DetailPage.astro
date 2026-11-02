@@ -66,7 +66,15 @@ const isProduct = page.kind === 'produk';
             {isProduct ? 'Minta Demo' : 'Konsultasi Gratis'}
             <span class="btn-arrow"><Icons name="arrow" class="h-3.5 w-3.5" /></span>
           </a>
-          <a href="#fitur" class="btn btn-ghost" data-magnetic data-cursor="hide">
+          {
+            page.appUrl && (
+              <a href={page.appUrl} target="_blank" rel="noopener" class="btn btn-ghost" data-magnetic data-cursor="hide">
+                {page.appLabel ?? 'Buka aplikasi'}
+                <span class="btn-arrow"><Icons name="arrow" class="h-3.5 w-3.5" /></span>
+              </a>
+            )
+          }
+          <a href="#fitur" class:list={['btn btn-ghost', page.appUrl && 'hidden']} data-magnetic data-cursor="hide">
             {page.featuresTitle}
             <span class="btn-arrow"><Icons name="arrow-right" class="h-3.5 w-3.5 rotate-90" /></span>
           </a>

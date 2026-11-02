@@ -39,6 +39,9 @@ export type DetailPage = {
   related: string[];
   /** schema.org serviceType / applicationSubCategory */
   schemaType: string;
+  /** Tautan ke aplikasi live (produk SaaS swalayan) */
+  appUrl?: string;
+  appLabel?: string;
 };
 
 export const servicePages: DetailPage[] = [
@@ -307,6 +310,60 @@ export const productPages: DetailPage[] = [
     ctaMessage: 'Halo Innaka, saya ingin minta demo WMS-Simple.',
     related: ['tokopilot-pos', 'sistem-bisnis-terintegrasi', 'data-perawatan-sistem'],
     schemaType: 'Warehouse Management System',
+  },
+  {
+    kind: 'produk',
+    slug: 'invora',
+    name: 'Invora',
+    // Sumber: repo innaka-tech/invoicing (FITUR.md, DOKUMENTASI_FITUR_APLIKASI.md)
+    seoTitle: 'Invora — Aplikasi Penagihan & Follow-up Piutang',
+    description:
+      'Invora: aplikasi penagihan untuk sekolah, distributor, koperasi, klinik & proyek. Kelola tagihan, catat pembayaran, follow-up via WhatsApp & telepon.',
+    eyebrow: 'Produk · Penagihan & Piutang',
+    h1: 'Invora:',
+    h1Italic: 'tagihan terpantau, follow-up tidak terlupa.',
+    intro:
+      'Invora adalah aplikasi penagihan buatan Innaka untuk mengelola tagihan dan menindaklanjuti piutang — SPP, invoice, angsuran, hingga termin proyek. Tim Anda bekerja dari satu antrian follow-up harian: buka chat WhatsApp, catat telepon, terima janji bayar, dan catat pembayaran.',
+    problems: [
+      'Daftar tagihan tersebar di Excel dan buku catatan, sulit tahu siapa yang sudah jatuh tempo.',
+      'Follow-up bergantung ingatan petugas — ada yang dihubungi berkali-kali, ada yang terlewat.',
+      'Janji bayar lewat chat tidak tercatat dan mudah terlupa.',
+      'Pemilik tidak punya gambaran jelas total tunggakan dan umur piutang.',
+    ],
+    featuresTitle: 'Fitur utama',
+    features: [
+      { title: 'Tiga mode tagihan', desc: 'Tagihan bulanan (SPP, iuran), tagihan sekali untuk banyak penerima, dan tagihan cepat untuk satu penerima — aktifkan yang Anda pakai saja.' },
+      { title: 'Antrian follow-up harian', desc: 'Petugas bekerja dari daftar "hari ini": WhatsApp click-to-chat dengan template pesan, catat telepon, janji bayar, dispute, atau selesai.' },
+      { title: 'Pencatatan pembayaran', desc: 'Catat tunai, transfer, QRIS, atau giro — termasuk pembayaran sebagian — lengkap dengan verifikasi.' },
+      { title: 'Broadcast & pengingat', desc: 'Template pesan dan aturan pengingat relatif terhadap jatuh tempo, dengan kirim massal lewat kanal yang Anda atur.' },
+      { title: 'Invoice PDF bermerek', desc: 'Tema, warna, logo, rekening/VA, dan penomoran invoice mengikuti identitas organisasi Anda.' },
+      { title: 'Dashboard & laporan', desc: 'Tagihan aktif, overdue, pembayaran bulan ini, janji bayar, performa petugas, tunggakan per kelas, dan umur piutang — ekspor Excel/PDF.' },
+    ],
+    audience: [
+      'Sekolah, bimbel & pesantren — SPP, uang gedung, beasiswa, tingkatan & kelas',
+      'Distributor & grosir — invoice dan piutang toko',
+      'Koperasi — angsuran & iuran anggota',
+      'Klinik — tagihan pasien',
+      'Company & proyek — termin proyek, rental, dan kontrak jasa',
+    ],
+    deliverables: [
+      'Template sesuai industri — label menu menyesuaikan (Siswa, Pelanggan, Anggota, Pasien)',
+      'Impor data dari Excel dengan pemetaan kolom',
+      'Peran pengguna: admin organisasi dan petugas penagihan',
+      'Keamanan akun: 2FA, passkey, dan login Google',
+      'Masa trial saat mendaftar',
+    ],
+    faqs: [
+      { q: 'Apakah Invora menerima pembayaran online otomatis?', a: 'Fokus Invora adalah penagihan dan follow-up. Pembayaran dicatat oleh petugas (tunai, transfer, QRIS, giro) lalu diverifikasi, sehingga tetap sesuai dengan cara pembayaran yang sudah berjalan di organisasi Anda.' },
+      { q: 'Apakah Invora sama dengan aplikasi akuntansi atau kasir?', a: 'Bukan. Invora khusus untuk tagihan dan follow-up piutang. Untuk kasir toko gunakan Tokopilot POS; untuk stok gudang gunakan WMS-Simple.' },
+      { q: 'Bagaimana memindahkan data tagihan yang sudah ada?', a: 'Data pihak tertagih dan tagihan dapat diimpor dari Excel: unggah file, pratinjau, petakan kolom, lalu impor.' },
+      { q: 'Apakah bisa dicoba dulu?', a: 'Bisa. Saat mendaftar organisasi, Anda memilih jenis bisnis dan mendapatkan masa trial sesuai paket.' },
+    ],
+    ctaMessage: 'Halo Innaka, saya ingin tahu lebih lanjut tentang Invora (aplikasi penagihan).',
+    related: ['tokopilot-pos', 'sistem-bisnis-terintegrasi', 'konsultasi-teknologi-ai'],
+    schemaType: 'Billing & accounts receivable follow-up',
+    appUrl: 'https://invoicing.innaka.dev',
+    appLabel: 'Buka Invora',
   },
 ];
 

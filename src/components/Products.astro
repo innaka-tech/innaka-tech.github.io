@@ -11,6 +11,14 @@ const posItems = [
   { name: 'Air Mineral', qty: 3, price: '18.000' },
 ];
 
+// Antrian follow-up (ilustrasi Invora)
+const followUps = [
+  { who: 'Ahmad R.', what: 'SPP Oktober', amount: '450.000', status: 'Terlambat 5 hari', tone: 'amber' },
+  { who: 'Toko Sumber Jaya', what: 'INV-0921', amount: '3.200.000', status: 'Jatuh tempo hari ini', tone: 'paper' },
+  { who: 'CV Maju Bersama', what: 'Termin 2', amount: '12.500.000', status: 'Janji bayar 3 Nov', tone: 'accent' },
+];
+const wide = (i: number) => products.length % 2 === 1 && i === products.length - 1;
+
 // Peta rak: nilai = tingkat isi 0–3
 const racks = [
   3, 2, 3, 1, 0, 2, 3, 3,
@@ -36,13 +44,13 @@ const rackColor = ['rgba(248,250,252,0.08)', 'rgba(248,250,252,0.28)', '#fbd38d'
     <div class="mt-14 grid gap-5 lg:mt-24 lg:grid-cols-2 lg:gap-6" data-reveal-stagger>
       {
         products.map((p, i) => (
-          <article class="product-card group relative flex flex-col overflow-hidden rounded-3xl bg-ink p-6 text-paper sm:p-10" id={p.id} data-theme-dark>
+          <article class:list={['product-card group relative flex flex-col overflow-hidden rounded-3xl bg-ink p-6 text-paper sm:p-10', wide(i) && 'lg:col-span-2 lg:grid lg:grid-cols-2 lg:gap-x-14']} id={p.id} data-theme-dark>
             <div
               class="pointer-events-none absolute -right-1/4 -top-1/4 h-[80%] w-[80%] rounded-full opacity-40 blur-3xl transition-transform duration-[1200ms] ease-[var(--ease-out-expo)] group-hover:scale-125"
               style={`background: radial-gradient(closest-side, ${p.accent}, transparent 70%)`}
               aria-hidden="true"
             />
-            <div class="relative">
+            <div class:list={['relative', wide(i) && 'lg:col-start-1']}>
               <div class="flex items-center justify-between">
                 <span class="eyebrow">{p.tag}</span>
                 <span class="font-mono text-[11px] text-paper/40">0{i + 1}</span>
@@ -53,7 +61,7 @@ const rackColor = ['rgba(248,250,252,0.08)', 'rgba(248,250,252,0.28)', '#fbd38d'
             </div>
 
             {/* Mockup UI (ilustrasi) */}
-            <div class="mockup relative mt-8 rounded-2xl border border-line bg-ink-2 p-4 transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:-translate-y-1 sm:p-5" aria-hidden="true" data-mockup>
+            <div class:list={['mockup relative mt-8 rounded-2xl border border-line bg-ink-2 p-4 transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:-translate-y-1 sm:p-5', wide(i) && 'lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:self-center']} aria-hidden="true" data-mockup>
               <div class="mb-4 flex items-center justify-between">
                 <div class="flex items-center gap-1.5">
                   <span class="h-2 w-2 rounded-full bg-paper/15" />
@@ -61,7 +69,7 @@ const rackColor = ['rgba(248,250,252,0.08)', 'rgba(248,250,252,0.28)', '#fbd38d'
                   <span class="h-2 w-2 rounded-full bg-paper/15" />
                 </div>
                 <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-paper/40">
-                  {p.id === 'tokopilot' ? 'Kasir 01 · Cabang Utama' : 'Gudang A · Zona R'}
+                  {p.id === 'tokopilot' ? 'Kasir 01 · Cabang Utama' : p.id === 'wms-simple' ? 'Gudang A · Zona R' : 'Follow-up hari ini · 12 tugas'}
                 </span>
               </div>
 
@@ -88,7 +96,7 @@ const rackColor = ['rgba(248,250,252,0.08)', 'rgba(248,250,252,0.28)', '#fbd38d'
                     </span>
                   </div>
                 </div>
-              ) : (
+              ) : p.id === 'wms-simple' ? (
                 <div class="grid gap-4 sm:grid-cols-[1.4fr_1fr]">
                   <div>
                     <div class="grid grid-cols-8 gap-1.5">
@@ -113,10 +121,48 @@ const rackColor = ['rgba(248,250,252,0.08)', 'rgba(248,250,252,0.28)', '#fbd38d'
                     </li>
                   </ul>
                 </div>
+              ) : (
+                <div>
+                  <div class="mb-3 grid grid-cols-3 gap-2">
+                    {[
+                      ['Piutang', 'Rp48,2jt'],
+                      ['Overdue', '17 akun'],
+                      ['Janji', '6'],
+                    ].map(([k, v]) => (
+                      <div class="mock-row rounded-lg bg-paper/[0.04] px-3 py-2.5">
+                        <p class="truncate font-mono text-[10px] uppercase tracking-[0.12em] text-paper/40">{k}</p>
+                        <p class="mt-1 whitespace-nowrap text-[14px] font-semibold tracking-tight sm:text-[15px]">{v}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <ul class="space-y-2">
+                    {followUps.map((f) => (
+                      <li class="mock-row flex items-center gap-3 rounded-lg bg-paper/[0.04] px-3 py-2.5 text-[13px]">
+                        <div class="min-w-0 flex-1">
+                          <p class="truncate font-medium">{f.who}</p>
+                          <p class="truncate font-mono text-[10px] text-paper/45">{f.what} · Rp {f.amount}</p>
+                        </div>
+                        <span
+                          class:list={[
+                            'hidden shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium sm:inline',
+                            f.tone === 'amber' && 'bg-amber/15 text-amber',
+                            f.tone === 'accent' && 'bg-accent/15 text-accent',
+                            f.tone === 'paper' && 'bg-paper/10 text-paper/80',
+                          ]}
+                        >
+                          {f.status}
+                        </span>
+                        <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#25D366]/15 text-[#25D366]">
+                          <Icons name="whatsapp" class="h-3.5 w-3.5" />
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
             </div>
 
-            <div class="relative mt-8 flex flex-1 flex-col justify-end">
+            <div class:list={['relative mt-8 flex flex-1 flex-col justify-end', wide(i) && 'lg:col-start-1']}>
               <ul class="grid grid-cols-1 gap-y-3 border-t border-line pt-6 sm:grid-cols-2 sm:gap-x-6">
                 {p.features.map((f) => (
                   <li class="flex items-center gap-3 text-[15px]">
@@ -126,7 +172,7 @@ const rackColor = ['rgba(248,250,252,0.08)', 'rgba(248,250,252,0.28)', '#fbd38d'
                 ))}
               </ul>
               <div class="mt-8 flex flex-wrap gap-3">
-                <a href={`/produk/${p.id === 'tokopilot' ? 'tokopilot-pos' : 'wms-simple'}/`} class="btn btn-ghost" data-magnetic data-cursor="hide">
+                <a href={`/produk/${p.slug}/`} class="btn btn-ghost" data-magnetic data-cursor="hide">
                   Lihat detail
                   <span class="btn-arrow"><Icons name="arrow-right" class="h-3.5 w-3.5" /></span>
                 </a>

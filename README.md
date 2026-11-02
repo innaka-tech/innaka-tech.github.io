@@ -27,7 +27,7 @@ Semua teks dan konfigurasi ada di `src/data/`, bukan di komponen:
 
 Halaman detail (`/layanan/<slug>/`, `/produk/<slug>/`) digenerate dari **`src/data/pages.ts`** memakai template `src/components/DetailPage.astro`. Untuk menambah halaman, cukup tambah satu objek di `servicePages` atau `productPages` — sitemap, footer, structured data (Service/SoftwareApplication, BreadcrumbList, FAQPage), dan `llms.txt` ikut terbarui otomatis.
 
-Fakta di halaman ini bersumber dari innaka-blueprint: COM-MKT-03 (profil pelanggan), COM-MKT-05 (paket solusi), APP-MOD-02 (fitur modul). Jangan menambah klaim (jumlah klien, angka hasil, harga) yang tidak ada di sumber. Sesuai APP-MOD-02 §3, produk belum boleh diklaim "siap pakai" sebelum checklist kesiapan jual terpenuhi.
+Fakta di halaman ini bersumber dari innaka-blueprint: COM-MKT-03 (profil pelanggan), COM-MKT-05 (paket solusi), APP-MOD-02 (fitur modul). Invora bersumber dari repo `innaka-tech/invoicing` (`FITUR.md`, `DOKUMENTASI_FITUR_APLIKASI.md`); tombol "Buka Invora" mengarah ke `https://invoicing.innaka.dev` (field `appUrl`). Jangan menambah klaim (jumlah klien, angka hasil, harga) yang tidak ada di sumber. Sesuai APP-MOD-02 §3, produk belum boleh diklaim "siap pakai" sebelum checklist kesiapan jual terpenuhi.
 
 ### Kontak (wajib diisi)
 
