@@ -60,6 +60,13 @@ Semua logo dan ikon berasal dari Logo Kit di repo `innaka-tech/innaka-blueprint`
 
 Bila Logo Kit diperbarui, salin ulang file-file di atas lalu jalankan `node scripts/make-og.mjs`.
 
+### Palet & font
+
+Mengikuti Brand Identity (COM-BRD-01): Navy `#0E2A47`, Teal `#0F8B8D`, Amber `#F5A524`, Surface `#F8FAFC`, Teal terang `#5EEAD4` (aksen di latar gelap), font **Plus Jakarta Sans**. Token ada di `src/styles/global.css`:
+
+- `ink` = latar, `paper` = teks — nilainya dibalik otomatis per section dengan atribut `data-theme-light` (dan `data-theme-dark` untuk kembali gelap di dalamnya).
+- Teal brand hanya 3,9:1 di Surface (gagal WCAG AA untuk teks kecil), jadi di section terang teks aksen memakai shade `#0B7174` dan tombol memakai Navy.
+
 ### OG image
 
 `public/og.png` dibuat dari `scripts/og.html`:

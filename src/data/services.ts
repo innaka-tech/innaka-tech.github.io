@@ -107,7 +107,7 @@ export const products: Product[] = [
     headline: 'Gudang rapi, stok akurat, pengiriman lebih cepat.',
     desc: 'Dari barang masuk hingga barang keluar — setiap pergerakan tercatat. Tidak ada lagi stok hantu dan pengiriman terlambat.',
     features: ['Inbound & outbound tracking', 'Stock opname cepat', 'Lokasi rak & batch', 'Integrasi ekspedisi'],
-    accent: 'var(--color-accent-2)',
+    accent: 'var(--color-amber)',
   },
 ];
 

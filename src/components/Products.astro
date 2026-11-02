@@ -17,25 +17,26 @@ const racks = [
   2, 3, 1, 2, 3, 3, 2, 0,
   3, 1, 2, 3, 2, 1, 3, 2,
 ];
-const rackColor = ['rgba(243,240,232,0.06)', 'rgba(255,179,107,0.25)', 'rgba(255,179,107,0.55)', 'var(--color-accent-2)'];
+// Warna solid (bukan transparan) supaya Amber tidak bercampur Navy jadi kehijauan
+const rackColor = ['rgba(248,250,252,0.08)', 'rgba(248,250,252,0.28)', '#fbd38d', 'var(--color-amber)'];
 ---
 
-<section id="produk" class="scroll-mt-[var(--nav-h)] bg-paper py-24 text-ink sm:py-32 lg:py-40" data-theme-light>
+<section id="produk" class="scroll-mt-[var(--nav-h)] bg-ink py-24 text-paper sm:py-32 lg:py-40" data-theme-light>
   <div class="container-x">
     <div class="grid gap-6 lg:grid-cols-12">
       <div class="flex items-center gap-4 lg:col-span-3" data-reveal>
-        <span class="font-mono text-[11px] text-ink/60">(02)</span>
-        <span class="eyebrow !text-ink/60">Software siap pakai</span>
+        <span class="font-mono text-[11px] text-accent">(02)</span>
+        <span class="eyebrow">Software siap pakai</span>
       </div>
       <h2 class="display t-section lg:col-span-9" data-split>
-        Pasang hari ini, <span class="serif-italic text-ink/70">jalan hari ini.</span>
+        Pasang hari ini, <span class="serif-italic text-teal">jalan hari ini.</span>
       </h2>
     </div>
 
     <div class="mt-14 grid gap-5 lg:mt-24 lg:grid-cols-2 lg:gap-6" data-reveal-stagger>
       {
         products.map((p, i) => (
-          <article class="product-card group relative flex flex-col overflow-hidden rounded-3xl bg-ink p-6 text-paper sm:p-10" id={p.id}>
+          <article class="product-card group relative flex flex-col overflow-hidden rounded-3xl bg-ink p-6 text-paper sm:p-10" id={p.id} data-theme-dark>
             <div
               class="pointer-events-none absolute -right-1/4 -top-1/4 h-[80%] w-[80%] rounded-full opacity-40 blur-3xl transition-transform duration-[1200ms] ease-[var(--ease-out-expo)] group-hover:scale-125"
               style={`background: radial-gradient(closest-side, ${p.accent}, transparent 70%)`}

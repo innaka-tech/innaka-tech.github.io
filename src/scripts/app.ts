@@ -128,7 +128,15 @@ function initReveals(): gsap.core.Timeline {
     const words = splitWords(el);
     if (reduceMotion) return;
     const delay = parseFloat(el.dataset.splitDelay ?? '0');
-    const vars: gsap.TweenVars = { y: 0, opacity: 1, duration: 1.2, ease: EASE, stagger: 0.045 };
+    const vars: gsap.TweenVars = {
+      y: 0,
+      opacity: 1,
+      duration: 1.2,
+      ease: EASE,
+      stagger: 0.045,
+      // Lepas mask setelah selesai supaya descender/aksen tidak terpotong
+      onComplete: () => el.querySelectorAll('.word').forEach((w) => w.classList.add('is-done')),
+    };
 
     if (isIntro(el)) intro.to(words, vars, delay);
     else gsap.to(words, { ...vars, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });

@@ -10,7 +10,7 @@ const bars = [38, 52, 44, 66, 58, 74, 90];
   <div class="grid-bg absolute inset-0 -z-10" aria-hidden="true"></div>
   <div
     class="hero-orb absolute -top-[20%] left-1/2 -z-10 h-[70vmax] w-[70vmax] -translate-x-1/2 rounded-full opacity-60 blur-3xl"
-    style="background: radial-gradient(closest-side, rgba(201,242,76,0.18), rgba(201,242,76,0.04) 60%, transparent 75%)"
+    style="background: radial-gradient(closest-side, rgba(94,234,212,0.16), rgba(15,139,141,0.06) 60%, transparent 75%)"
     aria-hidden="true"
   >
   </div>
@@ -32,7 +32,7 @@ const bars = [38, 52, 44, 66, 58, 74, 90];
         </div>
         <div class="mt-4 flex h-[72px] items-end gap-2">
           {bars.map((h, i) => (
-            <span class="hv-bar flex-1 origin-bottom rounded-[4px]" style={`height:${h}%; background:${i === bars.length - 1 ? 'var(--color-accent)' : 'rgba(243,240,232,0.12)'}`}></span>
+            <span class="hv-bar flex-1 origin-bottom rounded-[4px]" style={`height:${h}%; background:${i === bars.length - 1 ? 'var(--color-accent)' : 'rgba(248,250,252,0.12)'}`}></span>
           ))}
         </div>
         <div class="mt-2 flex justify-between font-mono text-[9px] text-paper/30">
@@ -41,13 +41,13 @@ const bars = [38, 52, 44, 66, 58, 74, 90];
       </div>
 
       <!-- Notifikasi pesanan -->
-      <div class="hv-card absolute left-0 top-[200px] flex w-[290px] items-center gap-3 rounded-2xl border border-line bg-ink-3/90 p-3.5 backdrop-blur-md" data-depth="1.1">
+      <div class="hv-card absolute left-0 top-[200px] flex w-[300px] items-center gap-3 rounded-2xl border border-line bg-ink-3/90 p-3.5 backdrop-blur-md" data-depth="1.1">
         <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#25D366]/15 text-[#25D366]">
           <Icons name="whatsapp" class="h-4.5 w-4.5" />
         </span>
         <div class="min-w-0">
           <p class="truncate text-[13px] font-medium">Pesanan baru #1042</p>
-          <p class="truncate text-[12px] text-muted">Masuk via WhatsApp · otomatis ke kasir</p>
+          <p class="truncate text-[12px] text-muted">Via WhatsApp · langsung ke kasir</p>
         </div>
       </div>
 
@@ -77,8 +77,8 @@ const bars = [38, 52, 44, 66, 58, 74, 90];
 
       <!-- Garis penghubung -->
       <svg class="absolute inset-0 -z-10 h-full w-full" viewBox="0 0 400 440" fill="none">
-        <path class="hv-link" d="M150 230 C 150 170, 210 150, 240 150" stroke="rgba(201,242,76,.35)" stroke-dasharray="3 5"></path>
-        <path class="hv-link" d="M200 262 C 240 262, 260 300, 270 330" stroke="rgba(201,242,76,.35)" stroke-dasharray="3 5"></path>
+        <path class="hv-link" d="M150 230 C 150 170, 210 150, 240 150" stroke="rgba(94,234,212,.4)" stroke-dasharray="3 5"></path>
+        <path class="hv-link" d="M200 262 C 240 262, 260 300, 270 330" stroke="rgba(94,234,212,.4)" stroke-dasharray="3 5"></path>
       </svg>
     </div>
   </div>
@@ -86,8 +86,8 @@ const bars = [38, 52, 44, 66, 58, 74, 90];
   <div class="container-x relative pb-10 sm:pb-14 lg:pb-16">
     <div class="mb-8 flex items-center gap-3 sm:mb-12" data-reveal>
       <span class="relative flex h-2 w-2">
-        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60"></span>
-        <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber opacity-60"></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-amber"></span>
       </span>
       <p class="eyebrow">Software house · Bekasi<span class="hidden sm:inline"> — menerima proyek baru</span></p>
     </div>
