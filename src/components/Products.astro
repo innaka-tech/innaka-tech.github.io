@@ -29,7 +29,7 @@ const rackColor = ['rgba(248,250,252,0.08)', 'rgba(248,250,252,0.28)', '#fbd38d'
         <span class="eyebrow">Software siap pakai</span>
       </div>
       <h2 class="display t-section lg:col-span-9" data-split>
-        Pasang hari ini, <span class="serif-italic text-teal">jalan hari ini.</span>
+        Bukan mulai dari nol, <span class="serif-italic text-teal">tinggal disesuaikan.</span>
       </h2>
     </div>
 
@@ -125,7 +125,11 @@ const rackColor = ['rgba(248,250,252,0.08)', 'rgba(248,250,252,0.28)', '#fbd38d'
                   </li>
                 ))}
               </ul>
-              <div class="mt-8">
+              <div class="mt-8 flex flex-wrap gap-3">
+                <a href={`/produk/${p.id === 'tokopilot' ? 'tokopilot-pos' : 'wms-simple'}/`} class="btn btn-ghost" data-magnetic data-cursor="hide">
+                  Lihat detail
+                  <span class="btn-arrow"><Icons name="arrow-right" class="h-3.5 w-3.5" /></span>
+                </a>
                 <a href={demoUrl(p.name)} {...contactLinkAttrs} class="btn btn-primary" data-magnetic data-cursor="hide">
                   Minta Demo {p.name.split(' ')[0]}
                   <span class="btn-arrow">

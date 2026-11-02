@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import DetailPage from '../../components/DetailPage.astro';
+import { servicePages } from '../../data/pages';
+import { detailGraph } from '../../data/schema';
+
+export function getStaticPaths() {
+  return servicePages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props;
+---
+
+<Base title={page.seoTitle} description={page.description} schema={detailGraph(page, page.seoTitle)}>
+  <DetailPage page={page} />
+</Base>

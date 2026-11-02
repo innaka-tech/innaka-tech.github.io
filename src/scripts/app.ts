@@ -301,7 +301,7 @@ function initStack() {
       if (i === cards.length - 1) return;
       gsap.to(card, {
         scale: 0.95,
-        opacity: 0.45,
+        '--dim': 0.6,
         transformOrigin: 'center top',
         ease: 'none',
         scrollTrigger: {

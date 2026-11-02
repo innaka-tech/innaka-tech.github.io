@@ -4,6 +4,7 @@
  */
 import { site, companyName } from './site';
 import { services, products, faqs } from './services';
+import { type DetailPage, pageUrl } from './pages';
 
 const url = site.url;
 const orgId = `${url}/#org`;
@@ -136,4 +137,80 @@ export function homeGraph(title: string, description: string) {
 /** Graph minimal untuk halaman lain (mis. 404) */
 export function baseGraph() {
   return { '@context': 'https://schema.org', '@graph': [organization, website] };
+}
+
+/** Graph untuk halaman detail layanan / produk */
+export function detailGraph(page: DetailPage, title: string) {
+  const pageUrlAbs = `${url}${pageUrl(page)}`;
+  const sectionName = page.kind === 'layanan' ? 'Layanan' : 'Produk';
+  const sectionAnchor = page.kind === 'layanan' ? 'layanan' : 'produk';
+
+  const mainEntity =
+    page.kind === 'produk'
+      ? {
+          '@type': 'SoftwareApplication',
+          '@id': `${pageUrlAbs}#software`,
+          name: page.name,
+          applicationCategory: 'BusinessApplication',
+          applicationSubCategory: page.schemaType,
+          operatingSystem: 'Web (PWA)',
+          description: page.intro,
+          featureList: page.features.map((f) => f.title),
+          inLanguage: 'id-ID',
+          publisher: { '@id': orgId },
+          url: pageUrlAbs,
+        }
+      : {
+          '@type': 'Service',
+          '@id': `${pageUrlAbs}#service`,
+          name: page.name,
+          serviceType: page.schemaType,
+          description: page.intro,
+          provider: { '@id': orgId },
+          areaServed: organization.areaServed,
+          audience: { '@type': 'BusinessAudience', name: page.audience.join('; ') },
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: `${page.name} — cakupan`,
+            itemListElement: page.features
+              .filter((f) => !f.soon)
+              .map((f) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: f.title, description: f.desc } })),
+          },
+          url: pageUrlAbs,
+        };
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      organization,
+      website,
+      {
+        '@type': 'WebPage',
+        '@id': `${pageUrlAbs}#webpage`,
+        url: pageUrlAbs,
+        name: title,
+        description: page.description,
+        inLanguage: 'id-ID',
+        isPartOf: { '@id': websiteId },
+        about: { '@id': mainEntity['@id'] },
+        breadcrumb: { '@id': `${pageUrlAbs}#breadcrumb` },
+        primaryImageOfPage: { '@type': 'ImageObject', url: `${url}/og.png`, width: 1200, height: 630 },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${pageUrlAbs}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Beranda', item: `${url}/` },
+          { '@type': 'ListItem', position: 2, name: sectionName, item: `${url}/#${sectionAnchor}` },
+          { '@type': 'ListItem', position: 3, name: page.name, item: pageUrlAbs },
+        ],
+      },
+      mainEntity,
+      {
+        '@type': 'FAQPage',
+        '@id': `${pageUrlAbs}#faq`,
+        mainEntity: page.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+      },
+    ],
+  };
 }

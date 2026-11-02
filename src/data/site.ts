@@ -16,7 +16,7 @@ export const site = {
    * supaya mesin pencari & AI mengutip deskripsi yang sama persis.
    */
   about:
-    'Innaka Tech adalah software house di Bekasi, Jawa Barat, yang membangun website, aplikasi mobile, sistem bisnis terintegrasi, dan solusi AI untuk UMKM hingga perusahaan di Indonesia. Innaka juga mengembangkan software siap pakai Tokopilot POS (kasir multi-cabang) dan WMS-Simple (manajemen gudang).',
+    'Innaka Tech adalah software house di Bekasi, Jawa Barat, yang membangun website, aplikasi mobile, sistem bisnis terintegrasi, dan solusi AI untuk UMKM hingga perusahaan di Indonesia. Innaka juga mengembangkan produk software Tokopilot POS (kasir multi-cabang) dan WMS-Simple (manajemen gudang).',
   /** Topik keahlian — untuk JSON-LD knowsAbout */
   knowsAbout: [
     'Pembuatan website',

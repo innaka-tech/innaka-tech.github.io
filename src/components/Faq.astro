@@ -1,6 +1,13 @@
 ---
-import { faqs } from '../data/services';
+import { faqs as homeFaqs } from '../data/services';
 import Icons from './Icons.astro';
+
+interface Props {
+  items?: { q: string; a: string }[];
+  index?: string;
+}
+const { items = homeFaqs, index = '05' } = Astro.props;
+const faqs = items;
 ---
 
 <section id="faq" class="scroll-mt-[var(--nav-h)] bg-ink text-paper" data-theme-light>
@@ -8,7 +15,7 @@ import Icons from './Icons.astro';
     <div class="lg:col-span-4">
       <div class="sticky top-[calc(var(--nav-h)+32px)]">
         <div class="mb-6 flex items-center gap-4" data-reveal>
-          <span class="font-mono text-[11px] text-accent">(05)</span>
+          <span class="font-mono text-[11px] text-accent">({index})</span>
           <span class="eyebrow">FAQ</span>
         </div>
         <h2 class="display t-section" data-split>

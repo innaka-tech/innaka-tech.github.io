@@ -1,0 +1,224 @@
+---
+/**
+ * Template halaman detail layanan / produk. Semua konten dari src/data/pages.ts.
+ * Ritme section: Navy (hero) → terang (masalah) → Navy (fitur) → terang (untuk siapa)
+ * → Navy (cara kerja) → terang (FAQ) → Navy (terkait + kontak).
+ */
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import Process from './Process.astro';
+import Faq from './Faq.astro';
+import Cta from './Cta.astro';
+import Icons from './Icons.astro';
+import { contactUrl, contactLinkAttrs, hasWhatsapp } from '../data/site';
+import { type DetailPage, findPage, pageUrl } from '../data/pages';
+
+interface Props {
+  page: DetailPage;
+}
+const { page } = Astro.props;
+const sectionName = page.kind === 'layanan' ? 'Layanan' : 'Produk';
+const sectionHref = page.kind === 'layanan' ? '/#layanan' : '/#produk';
+const related = page.related.map(findPage).filter((p): p is DetailPage => !!p);
+const isProduct = page.kind === 'produk';
+---
+
+<Nav localSections={['proses', 'faq', 'kontak']} />
+<main id="main">
+  <!-- Hero -->
+  <section id="top" class="relative isolate overflow-hidden pt-[calc(var(--nav-h)+3rem)] sm:pt-[calc(var(--nav-h)+5rem)]">
+    <div class="grid-bg absolute inset-0 -z-10" aria-hidden="true"></div>
+    <div
+      class="hero-orb absolute -top-[30%] right-[-20%] -z-10 h-[70vmax] w-[70vmax] rounded-full opacity-60 blur-3xl"
+      style="background: radial-gradient(closest-side, rgba(94,234,212,0.14), rgba(15,139,141,0.05) 60%, transparent 75%)"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="container-x pb-20 sm:pb-28 lg:pb-32">
+      <nav aria-label="Breadcrumb" class="mb-10 sm:mb-14" data-reveal>
+        <ol class="flex flex-wrap items-center gap-2 text-[13px] text-muted">
+          <li><a href="/" class="link-ul hover:text-paper" data-cursor="small">Beranda</a></li>
+          <li aria-hidden="true">/</li>
+          <li><a href={sectionHref} class="link-ul hover:text-paper" data-cursor="small">{sectionName}</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" class="text-paper">{page.name}</li>
+        </ol>
+      </nav>
+
+      <div class="mb-8 flex items-center gap-3" data-reveal>
+        <span class="h-2 w-2 rounded-full bg-amber"></span>
+        <p class="eyebrow">{page.eyebrow}</p>
+      </div>
+
+      <h1 class="display t-section max-w-[18ch] !text-[clamp(2.6rem,1rem+5vw,5.5rem)]" data-split data-split-delay="0.1">
+        {page.h1}
+        {page.h1Italic && <span class="serif-italic text-accent">{page.h1Italic}</span>}
+      </h1>
+
+      <div class="mt-10 grid items-end gap-8 border-t border-line pt-8 sm:mt-14 lg:grid-cols-12 lg:gap-12">
+        <p class="max-w-[60ch] text-pretty text-[17px] leading-relaxed text-muted lg:col-span-7 lg:text-[19px]" data-reveal data-reveal-delay="0.4">
+          {page.intro}
+        </p>
+        <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:col-span-5 lg:justify-end" data-reveal data-reveal-delay="0.5">
+          <a href={contactUrl(page.ctaMessage)} {...contactLinkAttrs} class="btn btn-primary" data-magnetic data-cursor="hide">
+            {hasWhatsapp && <Icons name="whatsapp" class="h-4 w-4" />}
+            {isProduct ? 'Minta Demo' : 'Konsultasi Gratis'}
+            <span class="btn-arrow"><Icons name="arrow" class="h-3.5 w-3.5" /></span>
+          </a>
+          <a href="#fitur" class="btn btn-ghost" data-magnetic data-cursor="hide">
+            {page.featuresTitle}
+            <span class="btn-arrow"><Icons name="arrow-right" class="h-3.5 w-3.5 rotate-90" /></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Masalah -->
+  <section class="bg-ink text-paper" data-theme-light aria-labelledby="masalah-title">
+    <div class="container-x grid gap-10 py-24 sm:py-32 lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-4">
+        <div class="mb-6 flex items-center gap-4" data-reveal>
+          <span class="font-mono text-[11px] text-accent">(01)</span>
+          <span class="eyebrow">Masalah yang sering terjadi</span>
+        </div>
+        <h2 id="masalah-title" class="display t-section !text-[clamp(2rem,1rem+2.6vw,3.25rem)]" data-split>
+          Terdengar <span class="serif-italic text-teal">familiar?</span>
+        </h2>
+      </div>
+      <ol class="grid gap-4 sm:grid-cols-2 lg:col-span-8" data-reveal-stagger>
+        {
+          page.problems.map((pr, i) => (
+            <li class="flex gap-5 rounded-2xl border border-line bg-ink-2 p-6 sm:last:odd:col-span-2">
+              <span class="font-mono text-[12px] text-accent">{String(i + 1).padStart(2, '0')}</span>
+              <p class="text-[16px] leading-relaxed">{pr}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Fitur -->
+  <section id="fitur" class="scroll-mt-[var(--nav-h)]" aria-labelledby="fitur-title">
+    <div class="container-x py-24 sm:py-32 lg:py-40">
+      <div class="mb-14 grid gap-6 lg:mb-20 lg:grid-cols-12">
+        <div class="flex items-center gap-4 lg:col-span-3" data-reveal>
+          <span class="font-mono text-[11px] text-accent">(02)</span>
+          <span class="eyebrow">{page.featuresTitle}</span>
+        </div>
+        <h2 id="fitur-title" class="display t-section lg:col-span-9" data-split>
+          {isProduct ? 'Semua yang dibutuhkan,' : 'Dikerjakan menyeluruh,'}
+          <span class="serif-italic text-paper-2">{isProduct ? 'tanpa ribet.' : 'bukan setengah jalan.'}</span>
+        </h2>
+      </div>
+
+      <div class="grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3" data-reveal-stagger>
+        {
+          page.features.map((f, i) => (
+            <div class="group relative flex flex-col bg-ink p-7 transition-colors duration-500 hover:bg-ink-2 sm:p-8">
+              <span class="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-accent transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-x-100" aria-hidden="true" />
+              <span class="font-mono text-[11px] text-paper/40">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="mt-10 flex flex-wrap items-center gap-3 text-[20px] font-semibold tracking-tight">
+                {f.title}
+                {f.soon && (
+                  <span class="rounded-full border border-accent/40 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-accent">Segera hadir</span>
+                )}
+              </h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-muted">{f.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Untuk siapa + yang Anda dapatkan -->
+  <section class="bg-ink text-paper" data-theme-light aria-labelledby="cocok-title">
+    <div class="container-x grid gap-14 py-24 sm:py-32 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <div class="mb-6 flex items-center gap-4" data-reveal>
+          <span class="font-mono text-[11px] text-accent">(03)</span>
+          <span class="eyebrow">Cocok untuk</span>
+        </div>
+        <h2 id="cocok-title" class="display t-section !text-[clamp(2rem,1rem+2.6vw,3.25rem)]" data-split>
+          Dibuat untuk <span class="serif-italic text-teal">bisnis seperti Anda.</span>
+        </h2>
+        <ul class="mt-10 divide-y divide-line border-y border-line" data-reveal-stagger>
+          {
+            page.audience.map((a) => (
+              <li class="flex items-start gap-4 py-5 text-[17px] leading-relaxed">
+                <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber" />
+                {a}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      {
+        page.deliverables && (
+          <div class="rounded-3xl border border-line bg-ink-2 p-7 sm:p-10" data-reveal>
+            <p class="eyebrow">Yang Anda dapatkan</p>
+            <ul class="mt-6 flex flex-col gap-4">
+              {page.deliverables.map((d) => (
+                <li class="flex items-start gap-3 text-[16px] leading-relaxed">
+                  <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-paper text-ink">
+                    <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                      <path d="m3.5 8.5 3 3 6-7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                  {d}
+                </li>
+              ))}
+            </ul>
+            <a href={contactUrl(page.ctaMessage)} {...contactLinkAttrs} class="btn btn-primary mt-8" data-magnetic data-cursor="hide">
+              {isProduct ? `Minta demo ${page.name}` : 'Diskusikan kebutuhan Anda'}
+              <span class="btn-arrow"><Icons name="arrow" class="h-3.5 w-3.5" /></span>
+            </a>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <Process index="04" />
+
+  <Faq items={page.faqs} index="05" />
+
+  <!-- Terkait -->
+  <section class="border-t border-line" aria-labelledby="terkait-title">
+    <div class="container-x py-24 sm:py-28">
+      <div class="mb-10 flex flex-wrap items-end justify-between gap-6">
+        <h2 id="terkait-title" class="display text-[clamp(1.75rem,1rem+2vw,2.75rem)]" data-split>
+          Layanan & produk <span class="serif-italic text-paper-2">terkait</span>
+        </h2>
+        <a href="/#layanan" class="link-ul text-[15px] text-paper/80 hover:text-paper" data-cursor="small">Lihat semua layanan</a>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3" data-reveal-stagger>
+        {
+          related.map((r) => (
+            <a
+              href={pageUrl(r)}
+              class="group flex min-h-[220px] flex-col justify-between rounded-3xl border border-line bg-ink-2 p-7 transition-colors duration-500 hover:border-accent/50"
+              data-cursor="hide"
+            >
+              <div>
+                <span class="eyebrow">{r.kind === 'produk' ? 'Produk' : 'Layanan'}</span>
+                <h3 class="mt-4 text-[22px] font-semibold tracking-tight">{r.name}</h3>
+                <p class="mt-2 line-clamp-2 text-[15px] leading-relaxed text-muted">{r.description}</p>
+              </div>
+              <span class="mt-6 inline-flex items-center gap-2 text-[14px] font-medium text-accent">
+                Selengkapnya
+                <Icons name="arrow-right" class="h-3.5 w-3.5 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1" />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Cta index="06" message={page.ctaMessage} />
+</main>
+<Footer />

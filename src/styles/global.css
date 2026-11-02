@@ -365,6 +365,20 @@
   /* Service stacking cards */
   /* Sticky hanya di desktop: di layar kecil kartu lebih tinggi dari viewport
      sehingga isinya akan tertutup kartu berikutnya. */
+  .stack-card {
+    position: relative;
+  }
+  /* Peredup saat kartu berikutnya menumpuk — overlay solid, bukan opacity,
+     supaya isi kartu di bawahnya tidak tembus pandang */
+  .stack-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--color-ink);
+    opacity: var(--dim, 0);
+    pointer-events: none;
+  }
   @media (min-width: 1024px) and (min-height: 760px) {
     .stack-card {
       position: sticky;

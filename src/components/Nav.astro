@@ -3,20 +3,29 @@ import { site, contactUrl, contactLinkAttrs, hasWhatsapp } from '../data/site';
 import Icons from './Icons.astro';
 import Logo from './Logo.astro';
 
+interface Props {
+  /** Section yang ada di halaman ini → tautan jadi anchor lokal (smooth scroll).
+   *  Section lain mengarah ke beranda (/#...). Default: semua di beranda, tidak ada di halaman lain. */
+  localSections?: string[];
+}
+const isHome = Astro.url.pathname === '/';
+const all = ['layanan', 'produk', 'proses', 'faq', 'kontak'];
+const { localSections = isHome ? all : [] } = Astro.props;
+const href = (id: string) => (localSections.includes(id) ? `#${id}` : `/#${id}`);
 const links = [
-  { href: '#layanan', label: 'Layanan' },
-  { href: '#produk', label: 'Produk' },
-  { href: '#proses', label: 'Cara Kerja' },
-  { href: '#faq', label: 'FAQ' },
-  { href: '#kontak', label: 'Kontak' },
-];
+  { section: 'layanan', label: 'Layanan' },
+  { section: 'produk', label: 'Produk' },
+  { section: 'proses', label: 'Cara Kerja' },
+  { section: 'faq', label: 'FAQ' },
+  { section: 'kontak', label: 'Kontak' },
+].map((l) => ({ ...l, href: href(l.section) }));
 ---
 
 <header id="nav" class="fixed inset-x-0 top-0 z-50 transition-transform duration-500 ease-[var(--ease-out-expo)]">
   <div class="nav-bg absolute inset-0 -z-10 border-b border-transparent bg-ink/0 backdrop-blur-0 transition-all duration-500"></div>
   <span class="nav-progress absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-accent" aria-hidden="true"></span>
   <nav class="container-x flex h-[var(--nav-h)] items-center justify-between" aria-label="Utama">
-    <a href="#top" class="flex items-center" data-cursor="small" aria-label={`${site.legalName || site.name} — beranda`}>
+    <a href={isHome ? '#top' : '/'} class="flex items-center" data-cursor="small" aria-label={`${site.legalName || site.name} — beranda`}>
       <Logo tone="auto" decorative class="h-8 lg:h-10" />
     </a>
 
@@ -28,7 +37,7 @@ const links = [
               href={l.href}
               class="nav-link block rounded-full px-4 py-1.5 text-[14px] text-paper/70 transition-colors duration-300 hover:text-paper"
               data-cursor="small"
-              data-section={l.href.slice(1)}
+              data-section={l.section}
             >
               {l.label}
             </a>

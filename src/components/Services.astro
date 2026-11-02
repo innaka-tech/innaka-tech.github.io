@@ -33,37 +33,58 @@ import Icons from './Icons.astro';
               </div>
               <h3 class="display t-card max-w-[16ch]">{s.title}</h3>
               <p class="mt-5 max-w-[40ch] text-[16px] leading-relaxed text-muted lg:text-[17px]">{s.summary}</p>
-              <a
-                href={contactUrl(`Halo Innaka, saya ingin diskusi tentang ${s.title}.`, `Diskusi: ${s.title}`)}
-                {...contactLinkAttrs}
-                class="group/cta mt-8 inline-flex w-fit items-center gap-3 text-[15px] font-medium text-paper lg:mt-auto lg:pt-10"
-                data-cursor="hide"
-              >
-                <span class="link-ul">Diskusikan kebutuhan ini</span>
-                <span class="grid h-8 w-8 place-items-center rounded-full border border-line transition-colors duration-300 group-hover/cta:border-accent group-hover/cta:bg-accent group-hover/cta:text-ink">
-                  <Icons name="arrow" class="h-3.5 w-3.5" />
-                </span>
-              </a>
+              <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4 lg:mt-auto lg:pt-10">
+                <a
+                  href={contactUrl(`Halo Innaka, saya ingin diskusi tentang ${s.title}.`, `Diskusi: ${s.title}`)}
+                  {...contactLinkAttrs}
+                  class="group/cta inline-flex w-fit items-center gap-3 text-[15px] font-medium text-paper"
+                  data-cursor="hide"
+                >
+                  <span class="link-ul">Diskusikan kebutuhan ini</span>
+                  <span class="grid h-8 w-8 place-items-center rounded-full border border-line transition-colors duration-300 group-hover/cta:border-accent group-hover/cta:bg-accent group-hover/cta:text-ink">
+                    <Icons name="arrow" class="h-3.5 w-3.5" />
+                  </span>
+                </a>
+                {s.href && (
+                  <a href={s.href} class="link-ul text-[15px] font-medium text-paper/70 hover:text-paper" data-cursor="small">
+                    Selengkapnya
+                  </a>
+                )}
+              </div>
             </div>
             <ul class="border-t border-line lg:col-span-7">
-              {s.items.map((it, j) => (
-                <li class="group flex items-start gap-5 border-b border-line py-5 last:border-b-0 sm:gap-8">
-                  <span class="mt-1 w-6 shrink-0 font-mono text-[11px] text-paper/35 transition-colors duration-300 group-hover:text-accent">
-                    {String(j + 1).padStart(2, '0')}
-                  </span>
-                  <div class="flex min-w-0 flex-col gap-1">
-                    <span class="flex flex-wrap items-center gap-3 text-[17px] font-medium tracking-tight transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1 lg:text-[19px]">
-                      {it.title}
-                      {it.soon && (
-                        <span class="rounded-full border border-accent/40 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
-                          Segera hadir
+              {s.items.map((it, j) => {
+                const Tag = it.href ? 'a' : 'div';
+                return (
+                  <li class="border-b border-line last:border-b-0">
+                    <Tag
+                      href={it.href}
+                      class:list={['group flex items-start gap-5 py-5 sm:gap-8', it.href && 'rounded-lg']}
+                      data-cursor={it.href ? 'small' : undefined}
+                    >
+                      <span class="mt-1 w-6 shrink-0 font-mono text-[11px] text-paper/35 transition-colors duration-300 group-hover:text-accent">
+                        {String(j + 1).padStart(2, '0')}
+                      </span>
+                      <div class="flex min-w-0 flex-1 flex-col gap-1">
+                        <span class="flex flex-wrap items-center gap-3 text-[17px] font-medium tracking-tight transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1 lg:text-[19px]">
+                          {it.title}
+                          {it.soon && (
+                            <span class="rounded-full border border-accent/40 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
+                              Segera hadir
+                            </span>
+                          )}
+                        </span>
+                        <span class="text-[15px] leading-relaxed text-muted">{it.desc}</span>
+                      </div>
+                      {it.href && (
+                        <span class="mt-1 shrink-0 text-paper/30 transition-all duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1 group-hover:text-accent" aria-hidden="true">
+                          <Icons name="arrow-right" class="h-4 w-4" />
                         </span>
                       )}
-                    </span>
-                    <span class="text-[15px] leading-relaxed text-muted">{it.desc}</span>
-                  </div>
-                </li>
-              ))}
+                    </Tag>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </article>

@@ -2,6 +2,13 @@
 import { site, contactUrl, contactLinkAttrs, hasWhatsapp } from '../data/site';
 import Icons from './Icons.astro';
 
+interface Props {
+  index?: string;
+  /** Pesan WhatsApp/email yang sudah terisi */
+  message?: string;
+}
+const { index = '06', message = site.whatsappMessage } = Astro.props;
+
 const assurances = [
   'Konsultasi awal gratis, tanpa komitmen',
   'Estimasi transparan, tanpa biaya tersembunyi',
@@ -19,7 +26,7 @@ const assurances = [
 
   <div class="container-x">
     <div class="mb-8 flex items-center gap-4" data-reveal>
-      <span class="font-mono text-[11px] text-accent">(06)</span>
+      <span class="font-mono text-[11px] text-accent">({index})</span>
       <span class="eyebrow">Mulai dari percakapan</span>
     </div>
     <h2 class="display t-cta leading-[0.95]" data-split>
@@ -31,7 +38,7 @@ const assurances = [
       <!-- Kanal kontak langsung -->
       <div class="flex flex-col gap-8 lg:col-span-5" data-reveal>
         <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <a href={contactUrl()} {...contactLinkAttrs} class="btn btn-primary !px-7 !py-4 !text-[16px]" data-magnetic data-cursor="hide">
+          <a href={contactUrl(message)} {...contactLinkAttrs} class="btn btn-primary !px-7 !py-4 !text-[16px]" data-magnetic data-cursor="hide">
             <Icons name={hasWhatsapp ? 'whatsapp' : 'mail'} class="h-5 w-5" />
             {hasWhatsapp ? 'Chat via WhatsApp' : 'Kirim email'}
             <span class="btn-arrow"><Icons name="arrow" class="h-3.5 w-3.5" /></span>

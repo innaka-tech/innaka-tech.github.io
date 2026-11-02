@@ -3,6 +3,8 @@ import { site } from './site';
 export type ServiceItem = {
   title: string;
   desc: string;
+  /** Tautan ke halaman detail (bila ada) */
+  href?: string;
   /** Ditampilkan sebagai "Segera hadir" jika true */
   soon?: boolean;
 };
@@ -13,6 +15,8 @@ export type Service = {
   title: string;
   eyebrow: string;
   summary: string;
+  /** Halaman detail pilar (bila ada) */
+  href?: string;
   items: ServiceItem[];
 };
 
@@ -25,15 +29,16 @@ export const services: Service[] = [
     summary:
       'Dari website hingga sistem operasional menyeluruh — dirancang khusus untuk cara bisnis Anda bekerja, bukan sebaliknya.',
     items: [
-      { title: 'Website profesional', desc: 'Tampilan yang membangun kepercayaan sejak detik pertama.' },
-      { title: 'Aplikasi mobile', desc: 'Siap bersaing di Play Store & App Store.' },
-      { title: 'Sistem bisnis terintegrasi', desc: 'Stok, penjualan, sampai karyawan — dalam satu tempat.' },
-      { title: 'Otomasi alur kerja', desc: 'Memangkas pekerjaan manual yang berulang.' },
-      { title: 'Integrasi mulus', desc: 'Payment gateway, marketplace, ekspedisi, dan WhatsApp.' },
+      { title: 'Website profesional', href: '/layanan/jasa-pembuatan-website/', desc: 'Tampilan yang membangun kepercayaan sejak detik pertama.' },
+      { title: 'Aplikasi mobile', href: '/layanan/jasa-pembuatan-aplikasi-mobile/', desc: 'Siap bersaing di Play Store & App Store.' },
+      { title: 'Sistem bisnis terintegrasi', href: '/layanan/sistem-bisnis-terintegrasi/', desc: 'Stok, penjualan, sampai karyawan — dalam satu tempat.' },
+      { title: 'Otomasi alur kerja', href: '/layanan/sistem-bisnis-terintegrasi/', desc: 'Memangkas pekerjaan manual yang berulang.' },
+      { title: 'Integrasi mulus', href: '/layanan/sistem-bisnis-terintegrasi/', desc: 'Payment gateway, marketplace, ekspedisi, dan WhatsApp.' },
     ],
   },
   {
     id: 'konsultasi',
+    href: '/layanan/konsultasi-teknologi-ai/',
     index: '02',
     eyebrow: 'Advise',
     title: 'Konsultasi Teknologi & AI',
@@ -53,14 +58,15 @@ export const services: Service[] = [
     eyebrow: 'Products',
     title: 'Software Siap Pakai',
     summary:
-      'Produk yang sudah teruji di lapangan. Pasang hari ini, jalan hari ini — tanpa menunggu pengembangan dari nol.',
+      'Produk buatan Innaka yang tinggal disesuaikan dengan bisnis Anda — tidak perlu menunggu pengembangan dari nol.',
     items: [
-      { title: 'Tokopilot POS', desc: 'Kasir pintar untuk toko dan multi-cabang, laporan penjualan real-time.' },
-      { title: 'WMS-Simple', desc: 'Gudang rapi, stok akurat, pengiriman lebih cepat.' },
+      { title: 'Tokopilot POS', href: '/produk/tokopilot-pos/', desc: 'Kasir pintar untuk toko dan multi-cabang, laporan penjualan real-time.' },
+      { title: 'WMS-Simple', href: '/produk/wms-simple/', desc: 'Gudang rapi, stok akurat, pengiriman lebih cepat.' },
     ],
   },
   {
     id: 'data-perawatan',
+    href: '/layanan/data-perawatan-sistem/',
     index: '04',
     eyebrow: 'Care',
     title: 'Data & Perawatan Sistem',
@@ -149,7 +155,7 @@ export const faqs = [
   },
   {
     q: 'Berapa lama waktu pengerjaannya?',
-    a: 'Website profil perusahaan umumnya 2–4 minggu. Aplikasi mobile atau sistem bisnis terintegrasi 2–4 bulan, tergantung fitur. Untuk software siap pakai seperti Tokopilot POS, bisa aktif dalam hitungan hari.',
+    a: 'Website profil perusahaan umumnya 2–4 minggu. Aplikasi mobile atau sistem bisnis terintegrasi 2–4 bulan, tergantung fitur. Untuk Tokopilot POS dan WMS-Simple waktunya lebih singkat karena tidak dibangun dari nol — estimasi pastinya kami berikan setelah melihat kebutuhan Anda.',
   },
   {
     q: 'Apakah ada garansi dan dukungan setelah selesai?',

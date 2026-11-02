@@ -6,6 +6,7 @@
 import type { APIRoute } from 'astro';
 import { site, companyName } from '../data/site';
 import { services, products, process, faqs } from '../data/services';
+import { servicePages, productPages, pageUrl } from '../data/pages';
 
 export const GET: APIRoute = () => {
   const a = site.addressFull;
@@ -35,7 +36,7 @@ export const GET: APIRoute = () => {
     lines.push('');
   }
 
-  lines.push('## Produk software siap pakai', '');
+  lines.push('## Produk software', '');
   for (const p of products) {
     lines.push(`### ${p.name} — ${p.tag}`, '', `${p.headline} ${p.desc}`, '', ...p.features.map((f) => `- ${f}`), '');
   }
@@ -47,7 +48,11 @@ export const GET: APIRoute = () => {
   lines.push('## Pertanyaan umum (FAQ)', '');
   for (const f of faqs) lines.push(`### ${f.q}`, '', f.a, '');
 
-  lines.push('## Halaman', '', `- [Beranda](${site.url}/): semua layanan, produk, cara kerja, FAQ, dan kontak`, `- [Sitemap](${site.url}/sitemap-index.xml)`, '');
+  lines.push('## Halaman', '', `- [Beranda](${site.url}/): ringkasan semua layanan, produk, cara kerja, FAQ, dan kontak`);
+  for (const pg of [...servicePages, ...productPages]) {
+    lines.push(`- [${pg.name}](${site.url}${pageUrl(pg)}): ${pg.description}`);
+  }
+  lines.push(`- [Sitemap](${site.url}/sitemap-index.xml)`, '');
 
   return new Response(lines.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 };

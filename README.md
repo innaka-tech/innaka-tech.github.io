@@ -23,6 +23,12 @@ Semua teks dan konfigurasi ada di `src/data/`, bukan di komponen:
 | `src/data/site.ts` | Nama, email, nomor WhatsApp, alamat, sosial media, feature flags |
 | `src/data/services.ts` | 4 pilar layanan, produk (Tokopilot POS, WMS-Simple), alasan, proses, FAQ |
 
+### Halaman layanan & produk
+
+Halaman detail (`/layanan/<slug>/`, `/produk/<slug>/`) digenerate dari **`src/data/pages.ts`** memakai template `src/components/DetailPage.astro`. Untuk menambah halaman, cukup tambah satu objek di `servicePages` atau `productPages` — sitemap, footer, structured data (Service/SoftwareApplication, BreadcrumbList, FAQPage), dan `llms.txt` ikut terbarui otomatis.
+
+Fakta di halaman ini bersumber dari innaka-blueprint: COM-MKT-03 (profil pelanggan), COM-MKT-05 (paket solusi), APP-MOD-02 (fitur modul). Jangan menambah klaim (jumlah klien, angka hasil, harga) yang tidak ada di sumber. Sesuai APP-MOD-02 §3, produk belum boleh diklaim "siap pakai" sebelum checklist kesiapan jual terpenuhi.
+
 ### Kontak (wajib diisi)
 
 Di `src/data/site.ts`:
