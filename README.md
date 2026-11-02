@@ -46,7 +46,19 @@ Form memakai [Web3Forms](https://web3forms.com) (gratis, tanpa backend). Daftar,
 - `/llms.txt` dibuat otomatis (`src/pages/llms.txt.ts`) — ringkasan Markdown untuk mesin AI.
 - `public/robots.txt` mengizinkan crawler mesin pencari & AI (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, dll.).
 - Jaga NAP (nama, alamat, telepon) **identik** dengan Google Business Profile.
-- Ikon PNG dibuat dari `public/favicon.svg`: `node scripts/make-icons.mjs`.
+
+### Logo & ikon
+
+Semua logo dan ikon berasal dari Logo Kit di repo `innaka-tech/innaka-blueprint` (`docs/company/06-brand/assets/`) dan **disalin apa adanya** — jangan diedit manual:
+
+| Di repo ini | Sumber di Logo Kit |
+|---|---|
+| `src/assets/brand/innaka-horizontal-{dark,light}.svg`, `innaka-mark-dark.svg` | `svg/` |
+| `public/favicon.svg` | `usage/web/favicon-adaptive.svg` |
+| `public/favicon.ico`, `favicon-{16,32,48}.png`, `apple-touch-icon.png`, `icon-{192,512}.png`, `icon-maskable-512.png` | `web/` |
+| `public/logo.png` (logo untuk Google / JSON-LD) | `png/on-background/innaka-mark-on-white-1024.png` |
+
+Bila Logo Kit diperbarui, salin ulang file-file di atas lalu jalankan `node scripts/make-og.mjs`.
 
 ### OG image
 

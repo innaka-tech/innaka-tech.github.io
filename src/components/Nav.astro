@@ -1,6 +1,7 @@
 ---
 import { site, contactUrl, contactLinkAttrs, hasWhatsapp } from '../data/site';
 import Icons from './Icons.astro';
+import Logo from './Logo.astro';
 
 const links = [
   { href: '#layanan', label: 'Layanan' },
@@ -15,12 +16,8 @@ const links = [
   <div class="nav-bg absolute inset-0 -z-10 border-b border-transparent bg-ink/0 backdrop-blur-0 transition-all duration-500"></div>
   <span class="nav-progress absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-accent" aria-hidden="true"></span>
   <nav class="container-x flex h-[var(--nav-h)] items-center justify-between" aria-label="Utama">
-    <a href="#top" class="group flex items-center gap-3" data-cursor="small" aria-label={`${site.name} — beranda`}>
-      <svg class="h-7 w-7" viewBox="0 0 64 64" aria-hidden="true">
-        <rect width="64" height="64" rx="14" class="fill-paper transition-colors duration-500 group-hover:fill-accent"></rect>
-        <path d="M18 46V18h7v28h-7Zm13 0V18l15 17.4V18h7v28L39 28.6V46h-8Z" class="fill-ink"></path>
-      </svg>
-      <span class="text-[15px] font-medium tracking-tight">{site.name}</span>
+    <a href="#top" class="flex items-center" data-cursor="small" aria-label={`${site.legalName || site.name} — beranda`}>
+      <Logo tone="auto" decorative class="h-8 lg:h-10" />
     </a>
 
     <ul class="hidden items-center gap-1 rounded-full border border-line p-1 md:flex" id="nav-links">

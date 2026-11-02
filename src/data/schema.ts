@@ -28,7 +28,7 @@ export const organization = {
   url,
   email: site.email,
   telephone: `+${site.whatsapp}`,
-  logo: { '@type': 'ImageObject', url: `${url}/logo.png`, width: 512, height: 512 },
+  logo: { '@type': 'ImageObject', url: `${url}/logo.png`, width: 1024, height: 1024 },
   image: `${url}/og.png`,
   address,
   hasMap: site.mapsUrl,

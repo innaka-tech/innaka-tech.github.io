@@ -296,66 +296,6 @@
     mask-image: radial-gradient(ellipse at 50% 0%, #000 20%, transparent 70%);
   }
 
-  /* Nav di atas section terang */
-  #nav {
-    transition:
-      transform 0.5s var(--ease-out-expo),
-      color 0.4s;
-  }
-  #nav.nav-on-light {
-    color: var(--color-ink);
-  }
-  #nav.nav-on-light .nav-bg.bg-ink\/70 {
-    background: rgba(243, 240, 232, 0.75);
-    border-color: rgba(11, 11, 15, 0.08);
-  }
-  #nav.nav-on-light a,
-  #nav.nav-on-light .text-paper\/80 {
-    color: var(--color-ink);
-  }
-  #nav.nav-on-light .btn-ghost {
-    border-color: rgba(11, 11, 15, 0.2);
-  }
-  #nav.nav-on-light .btn-ghost .btn-arrow {
-    background: rgba(11, 11, 15, 0.08);
-  }
-  #nav.nav-on-light .fill-paper {
-    fill: var(--color-ink);
-  }
-  #nav.nav-on-light .fill-ink {
-    fill: var(--color-paper);
-  }
-  #nav.nav-on-light .menu-line {
-    background: var(--color-ink);
-  }
-  .nav-link.is-active {
-    background: rgba(243, 240, 232, 0.1);
-    color: var(--color-paper);
-  }
-  #nav.nav-on-light #nav-links {
-    border-color: rgba(11, 11, 15, 0.12);
-  }
-  #nav.nav-on-light .nav-link {
-    color: rgba(11, 11, 15, 0.65);
-  }
-  #nav.nav-on-light .nav-link:hover,
-  #nav.nav-on-light .nav-link.is-active {
-    color: var(--color-ink);
-  }
-  #nav.nav-on-light .nav-link.is-active {
-    background: rgba(11, 11, 15, 0.07);
-  }
-  #nav.nav-on-light .btn-primary {
-    background: var(--color-ink);
-    color: var(--color-paper);
-  }
-  #nav.nav-on-light .btn-primary .btn-arrow {
-    background: rgba(243, 240, 232, 0.15);
-  }
-  #nav.nav-on-light #menu-btn {
-    border-color: rgba(11, 11, 15, 0.2);
-  }
-
   /* Service stacking cards */
   /* Sticky hanya di desktop: di layar kecil kartu lebih tinggi dari viewport
      sehingga isinya akan tertutup kartu berikutnya. */
@@ -446,4 +386,67 @@
     justify-content: space-between;
     padding: clamp(20px, 4vw, 48px);
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Nav di atas section terang — sengaja di luar @layer supaya menang    */
+/* atas utility Tailwind (.hidden, text-paper/70, bg-ink/70, dst.)      */
+/* ------------------------------------------------------------------ */
+#nav {
+  transition:
+    transform 0.5s var(--ease-out-expo),
+    color 0.4s;
+}
+#nav.nav-on-light {
+  color: var(--color-ink);
+}
+#nav.nav-on-light .nav-bg.bg-ink\/70 {
+  background: rgba(243, 240, 232, 0.75);
+  border-color: rgba(11, 11, 15, 0.08);
+}
+#nav.nav-on-light a,
+#nav.nav-on-light .text-paper\/80 {
+  color: var(--color-ink);
+}
+#nav.nav-on-light .btn-ghost {
+  border-color: rgba(11, 11, 15, 0.2);
+}
+#nav.nav-on-light .btn-ghost .btn-arrow {
+  background: rgba(11, 11, 15, 0.08);
+}
+#nav.nav-on-light .logo-dark {
+  display: none;
+}
+#nav.nav-on-light .logo-light {
+  display: inline-flex;
+}
+#nav.nav-on-light .menu-line {
+  background: var(--color-ink);
+}
+.nav-link.is-active {
+  background: rgba(243, 240, 232, 0.1);
+  color: var(--color-paper);
+}
+#nav.nav-on-light #nav-links {
+  border-color: rgba(11, 11, 15, 0.12);
+}
+#nav.nav-on-light .nav-link {
+  color: rgba(11, 11, 15, 0.65);
+}
+#nav.nav-on-light .nav-link:hover,
+#nav.nav-on-light .nav-link.is-active {
+  color: var(--color-ink);
+}
+#nav.nav-on-light .nav-link.is-active {
+  background: rgba(11, 11, 15, 0.07);
+}
+#nav.nav-on-light .btn-primary {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+#nav.nav-on-light .btn-primary .btn-arrow {
+  background: rgba(243, 240, 232, 0.15);
+}
+#nav.nav-on-light #menu-btn {
+  border-color: rgba(11, 11, 15, 0.2);
 }

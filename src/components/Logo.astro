@@ -1,0 +1,48 @@
+---
+/**
+ * Logo resmi Innaka dari Logo Kit (innaka-blueprint/docs/company/06-brand/assets).
+ * File SVG disalin apa adanya — jangan ubah warna/proporsi (lihat aturan brand).
+ *
+ * tone:
+ *  - 'dark'  → untuk latar gelap (default situs ini)
+ *  - 'light' → untuk latar terang
+ *  - 'auto'  → render keduanya; CSS menampilkan yang sesuai (dipakai di nav
+ *              yang berganti warna saat melewati section terang)
+ */
+import horizontalDark from '../assets/brand/innaka-horizontal-dark.svg?raw';
+import horizontalLight from '../assets/brand/innaka-horizontal-light.svg?raw';
+import markDark from '../assets/brand/innaka-mark-dark.svg?raw';
+
+interface Props {
+  variant?: 'horizontal' | 'mark';
+  tone?: 'dark' | 'light' | 'auto';
+  class?: string;
+  /** true bila elemen induk sudah punya label (mis. link dengan aria-label) */
+  decorative?: boolean;
+}
+
+const { variant = 'horizontal', tone = 'dark', class: cls = 'h-10', decorative = false } = Astro.props;
+
+/** Hapus width/height bawaan supaya ukuran diatur CSS; atur aksesibilitas. */
+function prepare(svg: string, hidden: boolean) {
+  // Hanya pada tag <svg> pembuka — <rect> di dalamnya butuh width/height-nya sendiri.
+  let out = svg.replace(/<svg\b[^>]*>/, (tag) => tag.replace(/\s(width|height)="[^"]*"/g, '').replace('<svg ', '<svg class="h-full w-auto" '));
+  if (hidden) out = out.replace(/\srole="img"/, '').replace(/\saria-label="[^"]*"/, ' aria-hidden="true" focusable="false"');
+  return out;
+}
+
+const dark = variant === 'mark' ? markDark : horizontalDark;
+const light = horizontalLight;
+---
+
+{
+  tone === 'auto' ? (
+    <span class:list={['logo inline-flex', cls]}>
+      <span class="logo-dark inline-flex h-full" set:html={prepare(dark, true)} />
+      <span class="logo-light hidden h-full" set:html={prepare(light, true)} />
+      {!decorative && <span class="sr-only">Innaka</span>}
+    </span>
+  ) : (
+    <span class:list={['logo inline-flex', cls]} set:html={prepare(tone === 'light' ? light : dark, decorative)} />
+  )
+}

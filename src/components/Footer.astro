@@ -1,6 +1,11 @@
 ---
 import { site, companyName } from '../data/site';
 import Icons from './Icons.astro';
+import Logo from './Logo.astro';
+import horizontalDark from '../assets/brand/innaka-horizontal-dark.svg?raw';
+
+// Path wordmark "innaka" dari logo resmi — dipakai untuk wordmark raksasa di footer.
+const wordmarkPath = horizontalDark.match(/<path d="([^"]+)"/)?.[1] ?? '';
 
 const year = new Date().getFullYear();
 const links = [
@@ -21,12 +26,8 @@ const socials = [
 <footer class="border-t border-line">
   <div class="container-x grid gap-12 py-14 lg:grid-cols-12 lg:py-20">
     <div class="lg:col-span-5">
-      <a href="#top" class="flex items-center gap-3" data-cursor="small">
-        <svg class="h-8 w-8" viewBox="0 0 64 64" aria-hidden="true">
-          <rect width="64" height="64" rx="14" class="fill-paper"></rect>
-          <path d="M18 46V18h7v28h-7Zm13 0V18l15 17.4V18h7v28L39 28.6V46h-8Z" class="fill-ink"></path>
-        </svg>
-        <span class="text-[17px] font-medium tracking-tight">{site.name}</span>
+      <a href="#top" class="inline-flex" data-cursor="small" aria-label={`${companyName} — kembali ke atas`}>
+        <Logo decorative class="h-9" />
       </a>
       <p class="mt-6 max-w-[44ch] text-[15px] leading-relaxed text-muted">{site.about}</p>
     </div>
@@ -69,20 +70,17 @@ const socials = [
     </a>
   </div>
 
-  <!-- Big wordmark -->
-  <div class="container-x overflow-hidden" aria-hidden="true">
-    <div class="footer-word display select-none whitespace-nowrap pt-4 text-center leading-[0.8]" data-footer-word>INNAKA</div>
+  <!-- Wordmark raksasa (path resmi dari logo) -->
+  <div class="container-x overflow-hidden pt-6" aria-hidden="true">
+    <svg class="footer-word block w-full" viewBox="114.8 35.18 142.99 35.38" data-footer-word>
+      <defs>
+        <linearGradient id="footer-word-fill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#f3f0e8" stop-opacity="0.1" />
+          <stop offset="0.9" stop-color="#f3f0e8" stop-opacity="0.015" />
+        </linearGradient>
+      </defs>
+      <path d={wordmarkPath} fill="url(#footer-word-fill)" />
+    </svg>
   </div>
 </footer>
 
-<style>
-  .footer-word {
-    /* Lebar wordmark ≈ 3.35em → isi penuh lebar container tanpa terpotong */
-    font-size: min(calc((100vw - 40px) / 3.4), 25rem);
-    letter-spacing: -0.045em;
-    background: linear-gradient(to bottom, rgba(243, 240, 232, 0.1), rgba(243, 240, 232, 0.015) 85%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-</style>

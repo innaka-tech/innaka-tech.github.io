@@ -29,7 +29,8 @@
         border-radius: 999px; filter: blur(80px);
         background: radial-gradient(closest-side, rgba(201,242,76,.22), transparent 70%);
       }
-      .top { display: flex; align-items: center; gap: 16px; position: relative; }
+      .top { display: flex; align-items: center; position: relative; height: 56px; }
+      .top svg { height: 56px; width: auto; }
       .mono { font-family: 'JetBrains Mono', monospace; font-size: 15px; letter-spacing: .18em; text-transform: uppercase; color: rgba(243,240,232,.56); }
       h1 { position: relative; font-weight: 500; font-size: 92px; line-height: .95; letter-spacing: -.035em; max-width: 1000px; }
       h1 i { font-family: 'Instrument Serif', serif; font-weight: 400; color: #c9f24c; }
@@ -40,10 +41,7 @@
   <body>
     <div class="grid"></div>
     <div class="orb"></div>
-    <div class="top">
-      <svg width="44" height="44" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#f3f0e8"/><path d="M18 46V18h7v28h-7Zm13 0V18l15 17.4V18h7v28L39 28.6V46h-8Z" fill="#0b0b0f"/></svg>
-      <span style="font-size:24px;font-weight:500;letter-spacing:-.02em">Innaka</span>
-    </div>
+    <div class="top"><!--LOGO--></div>
     <h1>Solusi digital <i>&amp; AI</i> untuk bisnis yang siap tumbuh.</h1>
     <div class="bottom">
       <span class="mono">Website · Aplikasi · Sistem Terintegrasi · Konsultasi AI</span>
